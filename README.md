@@ -9,7 +9,7 @@ Login with JWT and Todo (using RestfulAPI)
 * run project
 ```cmd
 cd server
-mvn srping:boot run
+mvn srping-boot:run
 ```
 
 * config(application.properties)
