@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <h1>LOGIN</h1>
-    <form @submit.prevent="login">
-      <input v-model="username" placeholder="username" />
-      <br />
-      <br />
-      <input v-model="password" placeholder="password" type="password" />
-      <br />
-      <br />
-      <button type="submit">Login</button>
+  <div class="container">
+    <div class="h1">LOGIN</div>
+    <form @submit.prevent="login" >
+      <div class="form-group row">
+        <label class="form-label col-4">Username: </label>
+        <input v-model="username" class="form-control col-6" placeholder="username" />
+      </div>
+      <div class="form-group row">
+        <label class="form-label col-4">Password: </label>
+        <input v-model="password" placeholder="password" class="form-control col-6" type="password" />
+      </div>
+      <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
     </form>
   </div>
 </template>

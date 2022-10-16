@@ -1,4 +1,5 @@
 import { store } from "@/store";
+import { constants }  from '@/constants'
 export const todoService = {
     getAll,
     getOne,
@@ -15,7 +16,7 @@ export const todoService = {
         "Authorization": `Bearer ${token}`,
       }
     };
-    return fetch("http://localhost/api/todos", headerOptions)
+    return fetch(`${constants.API_URL}/todos`, headerOptions)
     .then(response => response.json())
     .catch(err => { return err})
   }
@@ -30,7 +31,7 @@ export const todoService = {
       },
       body : JSON.stringify(id)
     };
-    return fetch("http://localhost/api/todo", headerOptions)
+    return fetch(`${constants.API_URL}/todo`, headerOptions)
     .then(response => response.json())
     .catch(err => { return err})
   }
@@ -45,7 +46,7 @@ export const todoService = {
       },
       body : JSON.stringify(todo)
     };
-    return fetch("http://localhost/api/todo", headerOptions)
+    return fetch(`${constants.API_URL}/todo`, headerOptions)
     .then(response => response.json())
     .catch(err => { return err})
   }
@@ -60,7 +61,7 @@ export const todoService = {
       },
       body : JSON.stringify(todo)
     };
-    return fetch("http://localhost/api/todo", headerOptions)
+    return fetch(`${constants.API_URL}/todo`, headerOptions)
     .then(response => response.json())
     .catch(err => { return err})
   }
@@ -75,7 +76,7 @@ export const todoService = {
       },
       body : JSON.stringify(todo)
     };
-    return fetch("http://localhost/api/todo", headerOptions)
+    return fetch(`${constants.API_URL}/todo`, headerOptions)
     .then(response => response.json())
     .catch(err => { return err})
   }

@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Login from "@/components/Login.vue";
 import Welcome from "@/components/Welcome.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
-import Todo from "@/components/Todo.vue";
+import Todo from "@/components/todo/Todo.vue";
 import { store } from "../store";
 
 Vue.use(VueRouter);

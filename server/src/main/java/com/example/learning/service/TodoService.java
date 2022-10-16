@@ -31,16 +31,6 @@ public class TodoService {
      */
     public List<Todo> getTodoList() {
         List<Todo> todoList = todoRepo.findAll();
-
-        for (int i = 0; i < todoList.size(); i++) {
-            if ("0".equals(todoList.get(i).getStatus())) {
-                todoList.get(i).setStatus("doing");
-            }
-            if ("1".equals(todoList.get(i).getStatus())) {
-                todoList.get(i).setStatus("done");
-            }
-        }
-
         return todoList;
 
     }
