@@ -103,8 +103,11 @@ public class TodoService {
      * @return
      */
     public List<Todo> getTodoByDate(String dateChange) {
-        List<Todo> todoList = todoRepo.findByDelFlgAnDate(0, dateChange);
-        return todoList;
+        if(Strings.isNotBlank(dateChange)) {
+            return todoRepo.findByDelFlgAnDate(0, dateChange);
+        } else {
+            return todoRepo.findByDelFlg(0);
+        }
     }
 
 }
