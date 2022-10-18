@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class TodoService {
      */
     public List<Todo> getTodoList(TodoRequest todoRequest) {
         List<Todo> todoList = new ArrayList<Todo>();
-        if (todoRequest != null && todoRequest.getDateChange() != null) {
+        if (todoRequest != null && Strings.isNotEmpty(todoRequest.getDateChange()) ) {
 
             todoList = todoRepo.findByDelFlgAnDate(0, todoRequest.getDateChange());
         } else {
