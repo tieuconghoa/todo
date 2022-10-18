@@ -1,38 +1,63 @@
 <template>
-  <div>
+  <div class="container">
     <div class="h1">Todo List</div>
     <div class="h5">
-      Số lượng todo: <span class="btn btn-info">{{ todos ? todos.length :'0' }}</span>
+      Todo Count:
+      <span class="btn btn-info">{{ todos ? todos.length : "0" }}</span>
     </div>
     <div class="clearfix mb-3">
-      <button class="btn btn-success pull-righ" data-toggle="modal" data-target="#todoCreateModal">
-        Add Todo
-      </button>
+      <div class="form-group row justify-content-center">
+        <input
+          class="form-control col-offset-2 col-sm-6"
+          type="text"
+          name="content"
+          v-model="content"
+          id="content"
+          required
+        />
+        <button
+          type="submit"
+          @click="addTodo"
+          :disabled="!this.content"
+          class="btn btn-primary ml-3"
+        >
+          Add
+        </button>
+      </div>
+      <div class="form-group row">
+        <label for="dateSelect" class="col-sm-4"> Date Show: </label>
+        <input
+          class="form-control col-sm-4"
+          type="date"
+          @change="changeDate"
+          v-model="dateSelect"
+        />
+      </div>
     </div>
-    <div class="container">
-      <table class="table table-bordered table-striped table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th class="w-75">Nội dung</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          <todo-row v-for="todo in todos" :todo_prop="todo" :key="todo.id"></todo-row>
-        </tbody>
-      </table>
+    <hr />
+
+    <div class="row justify-content-center mt-2">
+      <todo-row
+        v-for="todo in todos"
+        :todo_prop="todo"
+        :key="todo.id"
+        :date_prop="dateSelect"
+      ></todo-row>
     </div>
-    <todo-create @add-todo="addTodo"></todo-create>
   </div>
 </template>
 <script>
 import { store } from "@/store";
 import TodoRow from "./TodoRow.vue";
-import TodoCreate from "./TodoCreate.vue";
 export default {
-  components: { TodoRow, TodoCreate },
+  data: function () {
+    return {
+      content: null,
+      status: "0",
+      dateSelect: null,
+    };
+  },
+  components: { TodoRow },
   computed: {
     todo() {
       return store.state.todo.todo;
@@ -42,13 +67,30 @@ export default {
     },
   },
   created() {
-    store.dispatch("todo/getAll");
+    this.getDate();
+    const data = { dateChange: this.dateSelect };
+    store.dispatch("todo/changeDate", data);
   },
   methods: {
-    addTodo(data) {
+    addTodo() {
+      const data = { content: this.content, status: this.status };
       store.dispatch("todo/createTodo", data);
-    }
-  }
+    },
+    changeDate() {
+      const data = { dateChange: this.dateSelect };
+      store.dispatch("todo/changeDate", data);
+    },
+    getDate() {
+      const today = new Date();
+      const date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        (today.getDate() - 1);
+      this.dateSelect = date;
+    },
+  },
 };
 </script>
 <style>

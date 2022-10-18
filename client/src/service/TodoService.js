@@ -5,7 +5,8 @@ export const todoService = {
     getOne,
     createTodo,
     updateTodo,
-    deleteTodo
+    deleteTodo,
+    searchByDate
   };
   
   function getAll() {
@@ -32,6 +33,21 @@ export const todoService = {
       body : JSON.stringify(id)
     };
     return fetch(`${constants.API_URL}/todo`, headerOptions)
+    .then(response => response.json())
+    .catch(err => { return err})
+  }
+
+  function searchByDate(todo) {
+    const token = store.state.authentication.token;
+    const headerOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body : JSON.stringify(todo)
+    };
+    return fetch(`${constants.API_URL}/todo/changeDate`, headerOptions)
     .then(response => response.json())
     .catch(err => { return err})
   }

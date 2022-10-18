@@ -1,32 +1,52 @@
 <script>
 import { store } from "@/store";
 export default {
-  props: ["todo_prop"],
+  props: ["todo_prop", "date_prop"],
+  computed: {
+    todo() {
+      return this.todo_prop;
+    },
+    dateSelect() {
+      return this.date_prop;
+    },
+  },
   methods: {
-    editTodo() {
-      this.todo_prop.status = 1 - this.todo_prop.status;
-      store.dispatch("todo/updateTodo", this.todo_prop);
+    updateTodo() {
+      this.todo.status = 1 - this.todo.status;
+      this.todo.dateChange = this.dateSelect;
+      store.dispatch("todo/updateTodo", this.todo);
     },
     deleteTodo() {
-      store.dispatch("todo/deleteTodo", this.todo_prop);
-    }
-  }
+      this.todo.dateChange = this.dateSelect;
+      store.dispatch("todo/deleteTodo", this.todo);
+    },
+  },
 };
 </script>
 <template>
-  <tr>
-    <td>{{ this.todo_prop.id }}</td>
-    <td v-if="this.todo_prop.status == '1'"><s>{{ this.todo_prop.content }}</s></td>
-    <td v-if="this.todo_prop.status == '0'">{{ this.todo_prop.content }}</td>
-    <td>
-      <div :class="this.todo_prop.status == '1' ? 'btn  btn-success' : 'btn btn-info'"
-          @click="editTodo">
-        {{ this.todo_prop.status == '0' ? 'doing' : 'done' }}
-      </div>
-    </td>
-    <td>
-      <button class="btn btn-danger" @click="deleteTodo">Delete</button>
-    </td>
-  </tr>
+  <div class="w-75 row mt-1">
+    <div class="col-sm-2">
+      <span>{{ todo.id }}</span>
+    </div>
+    <div class="col-sm-8">
+      <s v-if="todo.status == '1'">{{ todo.content }}</s>
+      <u v-if="todo.status == '0'">{{ todo.content }}</u>
+    </div>
+    <button
+      v-if="todo.status == '0'"
+      type="button"
+      class="btn btn-outline-success ml-3"
+      @click="updateTodo"
+    >
+      &#10003;
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger ml-3"
+      @click="deleteTodo"
+    >
+      x
+    </button>
+  </div>
 </template>
 

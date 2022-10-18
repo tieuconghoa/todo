@@ -7,6 +7,7 @@ export const authentication = {
   state: {
     user: null,
     token: null,
+    error: null
   },
   mutations: {
     setUser(state, user) {
@@ -15,8 +16,15 @@ export const authentication = {
     setToken(state, token) {
       state.token = token;
     },
+    setErrorMessage(state, error) {
+      state.error = error;
+    },
   },
-  actions: {},
+  actions: {
+    loginFail({commit}, message) {
+      commit("setErrorMessage", message)
+    }
+  },
   getters: {
     isLoggedIn(state) {
       return !!state.token;

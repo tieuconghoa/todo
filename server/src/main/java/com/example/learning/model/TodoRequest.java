@@ -8,6 +8,8 @@ public class TodoRequest {
 
     private String status;
 
+    private String dateChange;
+
     /**
      * @return the id
      */
@@ -48,6 +50,20 @@ public class TodoRequest {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the dateChange
+     */
+    public String getDateChange() {
+        return dateChange;
+    }
+
+    /**
+     * @param dateChange the dateChange to set
+     */
+    public void setDateChange(String dateChange) {
+        this.dateChange = dateChange;
     }
 
 }

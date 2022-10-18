@@ -1,12 +1,18 @@
 package com.example.learning.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.learning.model.Todo;
+import com.example.learning.model.TodoRequest;
 import com.example.learning.repository.TodoRepository;
+import com.example.learning.user.CustomUserDetails;
 
 @Service
 public class TodoService {
@@ -29,39 +35,75 @@ public class TodoService {
      * 
      * @return
      */
-    public List<Todo> getTodoList() {
-        List<Todo> todoList = todoRepo.findAll();
+    public List<Todo> getTodoList(TodoRequest todoRequest) {
+        List<Todo> todoList = new ArrayList<Todo>();
+        if (todoRequest != null && todoRequest.getDateChange() != null) {
+
+            todoList = todoRepo.findByDelFlgAnDate(0, todoRequest.getDateChange());
+        } else {
+            todoList = todoRepo.findByDelFlg(0);
+        }
         return todoList;
 
     }
-    
-    /**
-     * 
-     * @param todo
-     * @return
-     */
-    public List<Todo> createTodo(Todo todo) {
-        todoRepo.save(todo);
-        return  getTodoList();
-    }
 
     /**
      * 
      * @param todo
      * @return
      */
-    public List<Todo> updateTodo(Todo todo) {
+    public List<Todo> createTodo(Todo todo, CustomUserDetails user, TodoRequest todoRequest) {
+        todo.setCreateUser(user.getUser().getId());
+        todo.setCreateDate(LocalDateTime.now());
+        todo.setDelFlg(0);
+        setCommonParamater(todo, user);
         todoRepo.save(todo);
-        return  getTodoList();
+        return getTodoList(todoRequest);
     }
 
     /**
-     * 
+     * update status
      * @param todo
      * @return
      */
-    public List<Todo> deleteTodo(Todo todo) {
-        todoRepo.deleteById(todo.getId());;
-        return  getTodoList();
+    public List<Todo> updateTodo(Todo todo, CustomUserDetails user, TodoRequest todoRequest) {
+        Todo entity = todoRepo.findById(todo.getId()).get();
+        entity.setStatus(todo.getStatus());
+        setCommonParamater(entity, user);
+        todoRepo.save(entity);
+        return getTodoList(todoRequest);
     }
+
+    /**
+     * delete logical
+     * @param todo
+     * @return
+     */
+    @Transactional(rollbackOn = Exception.class)
+    public List<Todo> deleteTodo(Todo todo, CustomUserDetails user, TodoRequest todoRequest) {
+        setCommonParamater(todo, user);
+        todoRepo.deleleTodoLogicalById(todo.getId());
+        return getTodoList(todoRequest);
+    }
+
+    /**
+     * set param
+     * @param todo
+     * @param user
+     */
+    private void setCommonParamater(Todo todo, CustomUserDetails user) {
+        todo.setUpdateUser(user.getUser().getId());
+        todo.setUpdateDate(LocalDateTime.now());
+    }
+
+    /**
+     * get data by date
+     * @param dateChange
+     * @return
+     */
+    public List<Todo> getTodoByDate(String dateChange) {
+        List<Todo> todoList = todoRepo.findByDelFlgAnDate(0, dateChange);
+        return todoList;
+    }
+
 }

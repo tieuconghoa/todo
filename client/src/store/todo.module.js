@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export const todo = {
   namespaced: true,
   state: {
-    todos: null
+    todos: null,
   },
   mutations: {
     getAllTodo(state, todos) {
@@ -16,24 +16,29 @@ export const todo = {
       state.todo = todo;
     },
   },
-  actions : {
+  actions: {
     getAll({ commit }) {
       todoService.getAll().then((todos) => {
-        commit("getAllTodo", todos)
+        commit("getAllTodo", todos);
       });
     },
     getOne({ commit }, id) {
       todoService.getOne(id).then((todo) => commit("getOneTodo", todo));
     },
-    createTodo({commit}, todo){
+    createTodo({ commit }, todo) {
       todoService.createTodo(todo).then((todos) => commit("getAllTodo", todos));
     },
-    updateTodo({commit}, todo){
+    updateTodo({ commit }, todo) {
       todoService.updateTodo(todo).then((todos) => commit("getAllTodo", todos));
     },
-    deleteTodo({commit}, todo){
+    deleteTodo({ commit }, todo) {
       todoService.deleteTodo(todo).then((todos) => commit("getAllTodo", todos));
-    }
+    },
+    changeDate({ commit }, todo) {
+      todoService
+        .searchByDate(todo)
+        .then((todos) => commit("getAllTodo", todos));
+    },
   },
   getters: {},
 };

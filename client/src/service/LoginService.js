@@ -15,6 +15,10 @@ function login(username, password) {
         })
     };
     return fetch(`${constants.API_URL}/authenticate`, headerOptions)
-        .then(response => response.json())
-        .catch(err => { return err })
+        .then(response => {
+            if(response.status === 200) {
+                return response.json();
+            }
+        })
+        .catch(err => { throw new Error(err) })
 }

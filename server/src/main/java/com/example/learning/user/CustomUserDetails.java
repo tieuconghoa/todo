@@ -9,21 +9,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.learning.model.User;
 
-
-public class CustomUserDetails implements UserDetails{
+public class CustomUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;
     User user;
 
     public CustomUserDetails(User user) {
-       this.user = user;
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
     }
-    
+
     @Override
     public String getPassword() {
         return user.getPassword();
@@ -53,4 +52,19 @@ public class CustomUserDetails implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
