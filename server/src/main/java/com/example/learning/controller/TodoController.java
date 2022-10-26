@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.learning.model.Todo;
+import com.example.learning.entity.Todo;
 import com.example.learning.model.TodoRequest;
 import com.example.learning.service.TodoService;
 import com.example.learning.user.CustomUserDetails;

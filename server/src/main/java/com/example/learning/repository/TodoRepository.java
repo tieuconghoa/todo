@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.learning.model.Todo;
+import com.example.learning.entity.Todo;
 
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Integer>{

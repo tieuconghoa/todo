@@ -1,29 +1,28 @@
-package com.example.learning.model;
+package com.example.learning.entity;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity
-@Table(name = "user")
+@Table(name = "todo")
 @Data
-public class User {
+public class Todo {
 
     @Id
-    @GeneratedValue
-    private Integer id;
+    @Column
+    int id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
-    private String password;
+    @Column
+    String content;
 
-    private String email;
+    @Column
+    String status;
 
     @Column(name = "create_user")
     private Integer createUser;
@@ -37,60 +36,49 @@ public class User {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
+    @Column(name = "del_flg")
+    private Integer delFlg;
+
     /**
      * @return the id
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * @return the username
+     * @return the content
      */
-    public String getUsername() {
-        return username;
+    public String getContent() {
+        return content;
     }
 
     /**
-     * @param username the username to set
+     * @param content the content to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     /**
-     * @return the password
+     * @return the status
      */
-    public String getPassword() {
-        return password;
+    public String getStatus() {
+        return status;
     }
 
     /**
-     * @param password the password to set
+     * @param status the status to set
      */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     /**
@@ -147,6 +135,20 @@ public class User {
      */
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
+    }
+
+    /**
+     * @return the delFlg
+     */
+    public Integer getDelFlg() {
+        return delFlg;
+    }
+
+    /**
+     * @param delFlg the delFlg to set
+     */
+    public void setDelFlg(Integer delFlg) {
+        this.delFlg = delFlg;
     }
 
 }

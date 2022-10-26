@@ -10,7 +10,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.learning.model.Todo;
+import com.example.learning.entity.Todo;
 import com.example.learning.model.TodoRequest;
 import com.example.learning.repository.TodoRepository;
 import com.example.learning.user.CustomUserDetails;

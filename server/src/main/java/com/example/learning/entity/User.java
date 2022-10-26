@@ -1,28 +1,29 @@
-package com.example.learning.model;
+package com.example.learning.entity;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity
-@Table(name = "todo")
+@Table(name = "user")
 @Data
-public class Todo {
+public class User {
 
     @Id
-    @Column
-    int id;
+    @GeneratedValue
+    private Integer id;
 
-    @Column
-    String content;
+    @Column(nullable = false, unique = true)
+    private String username;
+    private String password;
 
-    @Column
-    String status;
+    private String email;
 
     @Column(name = "create_user")
     private Integer createUser;
@@ -36,49 +37,60 @@ public class Todo {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
-    @Column(name = "del_flg")
-    private Integer delFlg;
-
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * @return the content
+     * @return the username
      */
-    public String getContent() {
-        return content;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param content the content to set
+     * @param username the username to set
      */
-    public void setContent(String content) {
-        this.content = content;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
-     * @return the status
+     * @return the password
      */
-    public String getStatus() {
-        return status;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param status the status to set
+     * @param password the password to set
      */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -135,20 +147,6 @@ public class Todo {
      */
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
-    }
-
-    /**
-     * @return the delFlg
-     */
-    public Integer getDelFlg() {
-        return delFlg;
-    }
-
-    /**
-     * @param delFlg the delFlg to set
-     */
-    public void setDelFlg(Integer delFlg) {
-        this.delFlg = delFlg;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.learning.model;
 
+import com.example.learning.entity.Todo;
+
 public class TodoResponse {
 
     private Todo todo;
