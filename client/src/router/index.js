@@ -4,6 +4,7 @@ import Login from "@/components/Login.vue";
 import Welcome from "@/components/Welcome.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Todo from "@/components/todo/Todo.vue";
+import ProductList from "@/components/product/ProductList.vue";
 import { store } from "../store";
 
 Vue.use(VueRouter);
@@ -27,6 +28,11 @@ const routes = [
     path: "/todo",
     name: "Todo",
     component: Todo,
+  },
+  {
+    path: "/product",
+    name: "Product",
+    component: ProductList,
   },
 ];
 const router = new VueRouter({

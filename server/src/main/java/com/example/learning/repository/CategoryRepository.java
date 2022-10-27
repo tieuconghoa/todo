@@ -3,9 +3,9 @@ package com.example.learning.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.learning.entity.Product;
+import com.example.learning.entity.Category;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 }

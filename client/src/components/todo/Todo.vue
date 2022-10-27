@@ -44,6 +44,7 @@
         :date_prop="dateSelect"
       ></todo-row>
     </div>
+    <router-link to="/product"><button class="btn btn-primary">Xem SP</button></router-link>
   </div>
 </template>
 <script>
@@ -93,16 +94,3 @@ export default {
   },
 };
 </script>
-<style>
-table {
-  table-layout: fixed;
-  width: 100%;
-}
-
-table td {
-  word-wrap: break-word;
-  /* All browsers since IE 5.5+ */
-  overflow-wrap: break-word;
-  /* Renamed property in CSS3 draft spec */
-}
-</style>

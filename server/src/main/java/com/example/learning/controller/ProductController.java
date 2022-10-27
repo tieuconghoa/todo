@@ -1,8 +1,5 @@
 package com.example.learning.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,16 +13,16 @@ import com.example.learning.service.ProductService;
 
 @RestController
 public class ProductController {
-    
+
     @Autowired
     private ProductService service;
 
     @CrossOrigin("http://localhost:8080")
     @RequestMapping(value = "/api/product", method = RequestMethod.GET)
-    public ResponseEntity<List<ProductResponse>> getProduct(ProductRequest productRequest) {
-       
-        List<ProductResponse> productList  = service.getListProduct(productRequest);
-        
-        return ResponseEntity.ok().body(productList);
+    public ResponseEntity<ProductResponse> getProduct(ProductRequest productRequest) {
+
+        ProductResponse products = service.getListProduct(productRequest);
+
+        return ResponseEntity.ok().body(products);
     }
 }
