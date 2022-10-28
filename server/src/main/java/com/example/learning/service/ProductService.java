@@ -30,6 +30,11 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    /**
+     * 
+     * @param productRequest
+     * @return
+     */
     public ProductResponse getListProduct(ProductRequest productRequest) {
 
         ProductResponse productResp = new ProductResponse();

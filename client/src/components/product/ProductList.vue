@@ -1,17 +1,19 @@
 <template>
-  <div>
-    <ProductDetail
-      v-for="product in products"
-      :product_prop="product"
-      :key="product.id"
-    />
+  <div class="container">
+    <div class="row">
+          <ProductItem
+            v-for="product in products"
+            :product_prop="product"
+            :key="product.id"
+          />
+    </div>
   </div>
 </template>
 <script>
 import { store } from "@/store";
-import ProductDetail from "./ProductDetail.vue";
+import ProductItem from "./ProductItem.vue";
 export default {
-  components: { ProductDetail },
+  components: { ProductItem },
   computed: {
     products() {
       return store.state.product.products;
