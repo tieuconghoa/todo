@@ -1,531 +1,667 @@
 <template>
   <div class="header">
-    <div class="overlay"></div>
-    <div class="utility-nav d-none d-md-block">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-6">
-            <p class="small">
-              <i class="bx bx-envelope"></i> logo@example.com |
-              <i class="bx bx-phone"></i> +91-9876543210
-            </p>
-          </div>
-
-          <div class="col-12 col-md-6 text-right">
-            <p class="small">Free shipping on total of $99 of all products</p>
+    <header>
+      <div class="topnav" id="myTopnav">
+        <a class="logo">LEVIOOSA<em>.COM</em></a>
+        <a @click="openSearch"><i class="fa fa-search"></i></a>
+        <a href="#"><i class="fa fa-user"></i></a>
+        <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        <a href="#">Grocery Menu</a>
+        <div class="dropdown">
+          <button class="dropbtn">
+            Boxes <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Select Box</a>
+            <a href="#">Create Box</a>
+            <a href="#">Finalize Box</a>
           </div>
         </div>
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+        <a href="#" class="active">Home</a>
+        <a
+          href="javascript:void(0);"
+          style="font-size: 15px"
+          class="icon"
+          @click="myFunction"
+          >&#9776;</a
+        >
+      </div>
+    </header>
+    <div id="navbar">
+      <div class="slide-menu">
+        <a class="logo">JAWARIBOX<em>.COM</em></a>
+        <a @click="openSearch"><i class="fa fa-search"></i></a>
+        <a href="#"><i class="fa fa-user"></i></a>
+        <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        <a href="#">Grocery Menu</a>
+        <div class="dropdown">
+          <button class="dropbtn">
+            Boxes <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Select Box</a>
+            <a href="#">Create Box</a>
+            <a href="#">Finalize Box</a>
+          </div>
+        </div>
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+        <a href="#" class="active">Home</a>
       </div>
     </div>
-
-    <nav
-      class="navbar navbar-expand-md navbar-light bg-light main-menu"
-      style="box-shadow: none"
-    >
-      <div class="container">
-        <ul class="navbar-nav ml-auto d-block d-md-none">
-          <li class="nav-item">
-            <a class="btn btn-link" href="#"
-              ><i class="bx bxs-cart icon-single"></i>
-              <span class="badge badge-danger">3</span></a
-            >
-          </li>
-        </ul>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="btn" href="#"> <i class="bx bx-search"></i> </a>
-            </li>
-            <li class="nav-item">
-              <a class="btn" href="#"
-                ><i class="bx bxs-cart icon-single"></i>
-                <span class="badge badge-danger">3</span></a
-              >
-            </li>
-            <li class="nav-item ml-md-3">
-              <a class="btn" href="#"
-                ><i class="bx bxs-user-circle mr-1"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-md navbar-light bg-light sub-menu">
-      <div class="container">
-        <div class="collapse navbar-collapse" id="navbar">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Home <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Schools</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Publishers</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Support
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Delivery Information</a>
-                <a class="dropdown-item" href="#">Privacy Policy</a>
-                <a class="dropdown-item" href="#">Terms & Conditions</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div class="search-bar d-block d-md-none">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <form class="form-inline mb-3 mx-auto">
-              <input
-                class="form-control"
-                type="search"
-                placeholder="Search for products..."
-                aria-label="Search"
-              />
-              <button class="btn btn-success" type="submit">
-                <i class="bx bx-search"></i>
-              </button>
-            </form>
-          </div>
-        </div>
+    <div id="myOverlay" class="overlay">
+      <span class="closebtn" @click="closeSearch" title="Close Overlay"
+        >×</span
+      >
+      <div class="overlay-content animate">
+        <form action="/action_page.php">
+          <input type="text" placeholder="Search.." name="search" />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
       </div>
     </div>
-
-    <!-- Sidebar -->
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-10 pl-0">
-              <a class="btn btn-primary" href="#"
-                ><i class="bx bxs-user-circle mr-1"></i> Log In</a
-              >
-            </div>
-
-            <div class="col-2 text-left">
-              <button type="button" id="sidebarCollapseX" class="btn btn-link">
-                <i class="bx bx-x icon-single"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <ul class="list-unstyled components links">
-        <li class="active">
-          <a href="#"><i class="bx bx-home mr-3"></i> Home</a>
-        </li>
-        <li>
-          <a href="#"><i class="bx bx-carousel mr-3"></i> Products</a>
-        </li>
-        <li>
-          <a href="#"><i class="bx bx-book-open mr-3"></i> Schools</a>
-        </li>
-        <li>
-          <a href="#"><i class="bx bx-crown mr-3"></i> Publishers</a>
-        </li>
-        <li>
-          <a
-            href="#pageSubmenu"
-            data-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-            ><i class="bx bx-help-circle mr-3"></i> Support</a
-          >
-          <ul class="collapse list-unstyled" id="pageSubmenu">
-            <li>
-              <a href="#">Delivery Information</a>
-            </li>
-            <li>
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li>
-              <a href="#">Terms & Conditions</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#"><i class="bx bx-phone mr-3"></i> Contact</a>
-        </li>
-      </ul>
-
-      <h6 class="text-uppercase mb-1">Categories</h6>
-      <ul class="list-unstyled components mb-3">
-        <li>
-          <a href="#">Category 1</a>
-        </li>
-        <li>
-          <a href="#">Category 1</a>
-        </li>
-        <li>
-          <a href="#">Category 1</a>
-        </li>
-        <li>
-          <a href="#">Category 1</a>
-        </li>
-        <li>
-          <a href="#">Category 1</a>
-        </li>
-        <li>
-          <a href="#">Category 1</a>
-        </li>
-      </ul>
-
-      <ul class="social-icons">
-        <li>
-          <a href="#" target="_blank" title=""
-            ><i class="bx bxl-facebook-square"></i
-          ></a>
-        </li>
-        <li>
-          <a href="#" target="_blank" title=""
-            ><i class="bx bxl-twitter"></i
-          ></a>
-        </li>
-        <li>
-          <a href="#" target="_blank" title=""
-            ><i class="bx bxl-linkedin"></i
-          ></a>
-        </li>
-        <li>
-          <a href="#" target="_blank" title=""
-            ><i class="bx bxl-instagram"></i
-          ></a>
-        </li>
-      </ul>
-    </nav>
   </div>
 </template>
 <script>
 export default {
-  created() {
-    $(document).ready(function () {
-      $("#sidebarCollapse").on("click", function () {
-        $("#sidebar").addClass("active");
-      });
-
-      $("#sidebarCollapseX").on("click", function () {
-        $("#sidebar").removeClass("active");
-      });
-
-      $("#sidebarCollapse").on("click", function () {
-        if ($("#sidebar").hasClass("active")) {
-          $(".overlay").addClass("visible");
-          console.log("it's working!");
-        }
-      });
-
-      $("#sidebarCollapseX").on("click", function () {
-        $(".overlay").removeClass("visible");
-      });
-    });
-
-    document.addEventListener("scroll", () => {
-      if (
-        document.body.scrollTop > 0 ||
-        document.documentElement.scrollTop > 0
-      ) {
-        $(".header").addClass("scroll-ability");
+  methods: {
+    openSearch() {
+      document.getElementById("myOverlay").style.display = "block";
+    },
+    closeSearch() {
+      document.getElementById("myOverlay").style.display = "none";
+    },
+    myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
       } else {
-        $(".header").removeClass("scroll-ability");
+        x.className = "topnav";
       }
-    });
+    }
+  },
+  created() {
+    //SHOW MENU BAR ON SCROLL
+    window.onscroll = function () {
+      scrollFunction();
+    };
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 100 ||
+        document.documentElement.scrollTop > 100
+      ) {
+        document.getElementById("navbar").style.top = "0";
+      } else {
+        document.getElementById("navbar").style.top = "-60px";
+      }
+    }
   },
 };
 </script>
 <style scoped>
-.header {
-  margin-bottom: 40px;
-  position: sticky;
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  scrollbar-color: rgb(210, 210, 210) rgb(46, 54, 69) !important;
+  scrollbar-width: thin !important;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: "Kanit", sans-serif;
+}
+
+/*DEFAULT*/
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+em {
+  font-style: normal;
+  color: #138275;
+}
+p {
+  font-size: 1.2em;
+  color: rgba(1, 1, 1, 0.6);
+}
+.title {
+  font-size: 3em;
+  font-family: "Archivo Black", sans-serif;
+}
+.sub-title {
+  font-size: 1em;
+  font-family: "Kanit", sans-serif;
+  color: gray;
+}
+.btn1 {
+  padding: 10px 20px;
+  box-shadow: 0px 3px 8px -3px rgba(1, 1, 1, 0.5);
+  outline: none;
+  border: 0;
+  background: #138275;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 400;
+  text-align: center;
+  transition: 0.5s;
+}
+.btn1:hover {
+  background-color: #1e1e1e;
+}
+.btn2 {
+  padding: 5px 20px;
+  box-shadow: 0px 3px 8px -3px rgba(1, 1, 1, 0.5);
+  outline: none;
+  border: 0;
+  background: #4033ff;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 400;
+  text-align: center;
+  transition: 0.5s;
+}
+.btn2:hover {
+  background: #3d35ec;
+}
+@media (max-width: 900px) {
+  .btn1 {
+    padding: 5px 10px;
+  }
+}
+.banner {
+  text-align: center;
+}
+.inline-photo {
+  opacity: 0;
+  transform: translateY(4em) rotateZ(-0deg);
+  transition: transform 4s 0.25s cubic-bezier(0, 1, 0.3, 1),
+    opacity 0.3s 0.25s ease-out;
+  will-change: transform, opacity;
+}
+.inline-photo.is-visible {
+  opacity: 1;
+  transform: rotateZ(-0deg);
+}
+.inline-photo2 {
+  opacity: 0;
+  transform: translateX(-15em) rotateZ(-0deg);
+  transition: transform 4s 0.25s cubic-bezier(0, 1, 0.3, 1),
+    opacity 0.3s 0.25s ease-out;
+  will-change: transform, opacity;
+}
+.inline-photo2.is-visible2 {
+  opacity: 1;
+  transform: rotateZ(-0deg);
+}
+.inline-photo3 {
+  opacity: 0;
+  transform: translateX(15em) rotateZ(-0deg);
+  transition: transform 4s 0.25s cubic-bezier(0, 1, 0.3, 1),
+    opacity 0.3s 0.25s ease-out;
+  will-change: transform, opacity;
+}
+.inline-photo3.is-visible3 {
+  opacity: 1;
+  transform: rotateZ(-0deg);
+}
+.ml9 {
+  position: relative;
+  font-weight: 200;
+  font-size: 3.5em;
+}
+.ml9 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml9 .letter {
+  transform-origin: 50% 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+/*LOADER*/
+/* Center the loader */
+.loading {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(#9ad5ff, #0071d6);
+}
+
+.loader {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transform: perspective(500px) rotatex(45deg);
+}
+
+.loader span {
+  position: absolute;
+  display: block;
+  border: 15px solid #fff;
+  box-sizing: border-box;
+  border-radius: 50%;
+  box-shadow: 0 10px 0 #e0e0e0, inset 0 10px 0 #e0e0e0;
+  animation: animate 4.5s ease-in-out infinite;
+}
+
+.loader span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 1.5s;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 3s;
+}
+
+@keyframes animate {
+  0% {
+    transform: translatez(-100px);
+    width: 100%;
+    height: 100%;
+  }
+  25% {
+    transform: translatez(100px);
+    width: 100%;
+    height: 100%;
+  }
+  50% {
+    transform: translatez(100px);
+    width: 35%;
+    height: 35%;
+  }
+  75% {
+    transform: translatez(-100px);
+    width: 35%;
+    height: 35%;
+  }
+  100% {
+    transform: translatez(-100px);
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Add animation to "page content" */
+.page-animate {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s;
+}
+
+@-webkit-keyframes animatebottom {
+  from {
+    bottom: 0px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes animatebottom {
+  from {
+    bottom: 0px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+#myPageShow {
+  display: none;
+}
+
+/*NAV-BAR*/
+header {
+  position: static;
   top: 0;
+  width: 100%;
   z-index: 999;
 }
-.btn .bx {
-  vertical-align: inherit;
-  margin-top: -3px;
-  font-size: 1.15rem;
+
+.topnav {
+  overflow: hidden;
+  width: 90%;
+  margin: auto;
+  background-color: #fff;
+  z-index: 9999;
 }
 
-.form-control {
-  height: calc(2.5rem + 2px);
-  padding: 0.5rem 1.5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.3rem;
-}
-
-.btn {
-  font-size: 1rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-}
-
-.bx.icon-single {
-  font-size: 1.5rem;
-}
-
-.form-inline .form-control {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.form-inline .btn {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.scroll-ability .utility-nav {
-  transition: 0.4s ease-in-out;
-  display: none !important;
-}
-.scroll-ability .main-menu {
-  position: absolute;
-  right: 60px;
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  #sidebar {
-    width: 55%;
-  }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .form-inline .form-control {
-    width: 210px;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .form-inline .form-control {
-    width: 440px;
-  }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .form-inline .form-control {
-    width: 600px;
-  }
-  #sidebar {
-    width: 25%;
-  }
-}
-
-.sub-menu.navbar-light .navbar-nav .active > .nav-link,
-.sub-menu.navbar-light .navbar-nav .nav-link.active,
-.sub-menu.navbar-light .navbar-nav .nav-link.show,
-.sub-menu.navbar-light .navbar-nav .show > .nav-link {
-  border-bottom: 3px solid #007bff;
-  color: #007bff;
-}
-
-.navbar .navbar-toggler {
-  border: none;
-}
-
-.navbar-light .navbar-toggler:focus {
-  outline: none;
-}
-
-.main-menu {
-  position: relative;
-  z-index: 3;
-}
-
-.sub-menu {
-  position: relative;
-  z-index: 2;
-  padding: 0 1rem;
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .sub-menu {
-    padding: 0 1rem;
-  }
-
-  .sub-menu.navbar-expand-md .navbar-nav .nav-link {
-    padding: 1rem 1.5rem;
-  }
-}
-
-.navbar.bg-light {
-  background: #fff !important;
-  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.1);
-}
-
-.user-dropdown .nav-link {
-  padding: 0.15rem 0;
-}
-
-#sidebar {
-  background: #fff;
-  height: 100%;
-  left: -100%;
-  top: 0;
-  bottom: 0;
-  overflow: auto;
-  position: fixed;
-  transition: 0.4s ease-in-out;
-  z-index: 5001;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-  padding: 1.25rem 1rem 1rem;
-}
-
-#sidebar.active {
-  left: 0;
-}
-
-#sidebar .sidebar-header {
-  background: #fff;
-  border-bottom: 1px solid #e4e4e4;
-  padding-bottom: 1.5rem;
-}
-
-#sidebar ul.components {
-  padding: 20px 0;
-  border-bottom: 1px solid #e4e4e4;
-  margin-bottom: 40px;
-}
-
-#sidebar ul p {
-  color: #fff;
-  padding: 10px;
-}
-
-#sidebar ul li a {
-  padding: 10px 16px;
-  font-size: 1.1em;
+.topnav a {
+  float: right;
   display: block;
   color: #000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  transition: 0.5s;
 }
 
-#sidebar ul li a:hover {
-  color: #7386d5;
-  background: #fff;
+.topnav .logo {
+  float: left;
+  font-family: "Fredoka One", cursive;
+  color: #000;
+  font-size: 2em;
 }
 
-#sidebar ul li.active > a,
-#sidebar a[aria-expanded="true"] {
-  color: #007bff;
-  background: #e6f2ff;
-  border-radius: 6px;
+.active {
+  color: gray;
 }
 
-a[data-toggle="collapse"] {
-  position: relative;
+.topnav .icon {
+  display: none;
 }
 
-#sidebar .links .dropdown-toggle::after {
-  display: block;
+.dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: #000;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
   position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
-.overlay {
-  background: rgba(0, 0, 0, 0.7);
-  height: 100vh;
-  left: 0;
-  position: fixed;
-  top: 0;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  z-index: -1;
-  width: 100%;
-  opacity: 0;
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
 }
 
-.overlay.visible {
-  opacity: 1;
-  z-index: 5000;
+.topnav a:hover,
+.dropdown:hover .dropbtn {
+  color: #138275;
 }
 
-/* .mobiHeader .menuActive~.overlay {
-    opacity: 1;
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media screen and (max-width: 900px) {
+  .topnav {
+    background: #fff;
     width: 100%;
-} */
-
-ul.social-icons {
-  list-style-type: none;
-  padding-left: 0;
-  margin-bottom: 0;
+  }
+  .topnav a:not(:first-child),
+  .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
 }
 
-ul.social-icons li {
-  display: inline-block;
-  margin-right: 0px;
-  margin-bottom: 0;
+@media screen and (max-width: 900px) {
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {
+    float: none;
+  }
+  .topnav.responsive .dropdown-content {
+    position: relative;
+  }
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+  .topnav .logo {
+    font-size: 1.5em;
+  }
+}
+#navbar {
+  background-color: #fff;
+  position: fixed;
+  top: -60px;
+  width: 100%;
+  display: block;
+  z-index: 9;
+  box-shadow: 0px 6px 16px -6px rgba(1, 1, 1, 0.5);
+  transition: top 0.3s;
 }
 
-#sidebar ul.social-icons li a {
-  font-size: 24px;
+#navbar a {
+  float: right;
+  display: block;
+  color: #000;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-.utility-nav {
-  background: #e4e4e4;
-  padding: 0.5rem 1rem;
+#navbar .logo {
+  float: left;
 }
 
-.utility-nav p {
-  margin-bottom: 0;
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
 }
 
-.search-bar {
+.slide-menu .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.slide-menu .dropdown .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: #000;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  #navbar {
+    display: none;
+  }
+}
+
+
+@keyframes opaqTransition {
+  3% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(0);
+  }
+  28% {
+    transform: translateX(-700px);
+  }
+  100% {
+    transform: translateX(-700px);
+  }
+}
+
+@media (max-width: 720px) {
+}
+
+@keyframes opaqTransition {
+  3% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(0);
+  }
+  28% {
+    transform: translateX(-700px);
+  }
+  100% {
+    transform: translateX(-700px);
+  }
+}
+
+@media (max-width: 600px) {
+}
+
+@media (max-width: 500px) {
+}
+
+/*SEARCH MODAL*/
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.overlay-content {
   position: relative;
-  z-index: 2;
-  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.1);
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
 }
 
-.search-bar .form-control {
-  width: calc(100% - 45px);
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
 }
 
-.avatar {
-  border-radius: 50%;
-  width: 4.5rem;
-  height: 4.5rem;
-  margin-right: 8px;
+.overlay .closebtn:hover {
+  color: #ccc;
 }
 
-.avatar.avatar-xs {
-  width: 2.25rem;
-  height: 2.25rem;
+.overlay input[type="text"] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 70%;
+  background: white;
 }
 
-.user-dropdown .dropdown-menu {
-  left: auto;
+.overlay input[type="text"]:hover {
+  background: #f1f1f1;
+}
+
+.overlay button {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #bbb;
+}
+
+/* ZOOM ANIMATION */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.topnav a:hover, .dropdown:hover .dropbtn {
+color:#138275;
+}
+
+.credits {
+  background: #1e1e1e;
+  color: gray;
+  font-size: 13px;
+  padding: 10px;
+  position: fixed;
   right: 0;
+  bottom: 20px;
 }
 </style>
