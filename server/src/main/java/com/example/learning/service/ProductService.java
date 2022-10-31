@@ -59,8 +59,11 @@ public class ProductService {
             List<ReviewProduct> reviewPrdByIdList = reviewPrdList.stream()
                     .filter(rp -> rp.getProductId() == product.getId()).collect(Collectors.toList());
             productData.setReviewCount(reviewPrdByIdList.size());
-            int sum = reviewPrdByIdList.stream().mapToInt(o -> o.getRate()).sum();
-            productData.setRate(new BigDecimal(sum).divide(new BigDecimal(reviewPrdByIdList.size())));
+            if(reviewPrdByIdList.size() == 0) {
+            } else {
+                int sum = reviewPrdByIdList.stream().mapToInt(o -> o.getRate()).sum();
+                productData.setRate(new BigDecimal(sum).divide(new BigDecimal(reviewPrdByIdList.size())));
+            }
             productDataList.add(productData);
         }
         productResp.setProducts(productDataList);

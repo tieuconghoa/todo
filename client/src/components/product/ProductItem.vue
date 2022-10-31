@@ -1,29 +1,29 @@
 <template>
-  <div class="col-3">
+  <div class="col-md-4 col-lg-3 col-sm-6 mb-5">
     <img width="300" height="400" class="img-fluid" :src="product.imageUrl" />
-    <div>{{ product.name }}</div>
+    <div class="product-name mt-2">{{ product.name }}</div>
     <div>
       <span class="text-danger font-weight-bold">{{
         this.fomatCurrency(product.discount)
       }}</span>
-      <span class="ml-1 font-weight-light"
+      <span class="ml-1 font-weight-light" v-if="product.price !=product.discount"
         ><del>{{ this.fomatCurrency(product.price) }}</del></span
       >
-      <span class="ml-1 text-muted"
+      <span class="ml-1 text-muted font-weight-lighter btn-sm" v-if="product.price !=product.discount"
         >{{ this.caculateSaleOff(product.price, product.discount) }}% OFF</span
       >
     </div>
-    <div class="row">
+    <div class="row" v-show="product.reviewCount > 0">
       <div class="col-6">
         <div class="star-rating">
-          <div class="back-stars" :title="product.rating*20 + '%'">
+          <div class="back-stars" :title="product.rate*20 + '%'">
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
 
-            <div class="front-stars" :style="{ width: product.rating*20 + '%' }">
+            <div class="front-stars" :style="{ width: product.rate*20 + '%' }">
               <i class="fa fa-star" aria-hidden="true"></i>
               <i class="fa fa-star" aria-hidden="true"></i>
               <i class="fa fa-star" aria-hidden="true"></i>

@@ -50,7 +50,7 @@ export default {
             const { user, token } = response;
             store.commit("setUser", user);
             store.commit("setToken", token);
-            this.$router.push("/todo");
+            this.$router.push("/product");
           } else {
             store.dispatch("loginFail", "User not exist or wrong password!")
           }

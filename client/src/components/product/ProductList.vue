@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div class="row">
-          <ProductItem
-            v-for="product in products"
-            :product_prop="product"
-            :key="product.id"
-          />
+      <ProductItem
+        v-for="product in products"
+        :product_prop="product"
+        :key="product.id"
+      />
     </div>
   </div>
 </template>
@@ -18,9 +18,9 @@ export default {
     products() {
       return store.state.product.products;
     },
-    created() {
-      store.dispatch("product/getAllProduct");
-    },
+  },
+  created() {
+    store.dispatch("product/getAllProduct");
   },
 };
 </script>
