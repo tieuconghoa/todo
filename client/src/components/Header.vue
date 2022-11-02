@@ -23,26 +23,26 @@
       </div>
     </div>
     <header class="main-header">
-      <div class="mid-header">
+      <div class="mid-header d-lg-flex d-none">
         <div class="logo-branch">
           <div>SHOPPING.COM</div>
         </div>
         <div class="icon-menu">
           <span>
-            <i class="fa fa-user"></i>
+            <button class="btn"><i class="fa fa-user"></i></button>
           </span>
           <span>
-            <i class="fa fa-search"></i>
+            <button class="btn"><i class="fa fa-search"></i></button>
           </span>
           <span>
-            <i class="fa fa-cart-shopping"></i>
+            <button class="btn"><i class="fa fa-cart-shopping"></i></button>
           </span>
         </div>
       </div>
       <div class="list-menu">
         <nav class="navbar navbar-expand-lg navbar-light container">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-header navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -71,6 +71,10 @@
                 </div>
               </li>
             </ul>
+          </div>
+          <div class="d-lg-none d-flex form-search-mobile">
+            <input type="text" class="form-control">
+            <button class="btn btn-nav"><i class="fa fa-search"></i></button>
           </div>
         </nav>
       </div>
@@ -101,7 +105,6 @@ export default {
 
 .mid-header {
   padding: 10px 60px;
-  display: flex;
   justify-content: center;
 }
 
@@ -115,7 +118,7 @@ export default {
 }
 
 .icon-menu span {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 
 .list-menu {
@@ -144,7 +147,12 @@ export default {
 }
 
 .scrollable .mid-header .icon-menu {
-  padding-top: 15px;
+  padding-top: 10px;
+}
+.form-search-mobile {
+  position: absolute;
+  top: 10px;
+  right: 0px;
 }
 
 @keyframes fadeInDown {
