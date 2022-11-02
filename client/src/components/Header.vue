@@ -75,6 +75,7 @@
           <div class="d-lg-none d-flex form-search-mobile">
             <input type="text" class="form-control">
             <button class="btn btn-nav"><i class="fa fa-search"></i></button>
+            <button class="btn"><i class="fa fa-cart-shopping"></i></button>
           </div>
         </nav>
       </div>
@@ -153,6 +154,7 @@ export default {
   position: absolute;
   top: 10px;
   right: 0px;
+  width: 80%;
 }
 
 @keyframes fadeInDown {
