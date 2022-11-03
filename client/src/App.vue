@@ -23,4 +23,8 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.modal-open {
+  padding-right: 420px !important;
+  transition: all 1s;
+}
 </style>

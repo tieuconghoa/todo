@@ -134,9 +134,9 @@
           </div>
 
           <div class="modal-body">
-            <form action="#" class="form-inline">
-              <input type="text" class="form-control">
-              <button class="btn btn-danger"><i class="fa fa-search"></i></button>
+            <form action="#" class="input-group input-group-lg">
+              <input type="text" class="form-control input-lg">
+              <button class="btn btn-danger ml-2"><i class="fa fa-search"></i></button>
             </form>
           </div>
         </div>
@@ -171,6 +171,7 @@ export default {
 .mid-header {
   padding: 10px 60px;
   justify-content: center;
+  z-index: 2;
 }
 
 .mid-header > div {
@@ -223,7 +224,7 @@ export default {
 .modal.right .modal-dialog {
   position: fixed;
   margin: auto;
-  width: 320px;
+  width: 420px;
   height: 100%;
   -webkit-transform: translate3d(0%, 0, 0);
   -ms-transform: translate3d(0%, 0, 0);
@@ -249,6 +250,10 @@ export default {
 
 .modal.right.fade.in .modal-dialog {
   right: 0;
+}
+
+.modal.right.fade.show {
+  transition: all 0.45s;
 }
 
 /* ----- MODAL STYLE ----- */
