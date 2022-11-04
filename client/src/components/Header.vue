@@ -128,6 +128,7 @@
               class="close"
               data-dismiss="modal"
               aria-label="Close"
+              @click="clearSearch"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -196,9 +197,12 @@ export default {
   methods: {
     searchProduct() {
       const data = { id: this.id, name: this.name };
-      console.log(data);
       store.dispatch("product/getProductByName", data);
     },
+    clearSearch() {
+      this.name = null;
+      store.state.product.productSearch = null;
+    }
   },
   created() {
     document.addEventListener("scroll", () => {
