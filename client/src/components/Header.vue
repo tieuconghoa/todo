@@ -104,7 +104,7 @@
               </ul>
             </div>
             <div class="d-lg-none d-flex form-search-mobile">
-              <input type="text" class="form-control" />
+              <input type="text" class="form-control" v-model="name" />
               <button class="btn btn-nav"><i class="fa fa-search"></i></button>
               <button class="btn"><i class="fa fa-cart-shopping"></i></button>
             </div>
@@ -134,10 +134,43 @@
           </div>
 
           <div class="modal-body">
-            <form action="#" class="input-group input-group-lg">
-              <input type="text" class="form-control input-lg">
-              <button class="btn btn-danger ml-2"><i class="fa fa-search"></i></button>
+            <form class="input-group input-group-lg mb-4">
+              <input
+                type="text"
+                class="form-control input-lg"
+                @keyup="searchProduct"
+                v-model="name"
+              />
+              <button class="btn btn-danger ml-2">
+                <i class="fa fa-search"></i>
+              </button>
             </form>
+            <div class="search-list">
+              <div
+                class="item-search row"
+                v-for="product in this.productSearch"
+                :key="product.id"
+              >
+                <div class="text-left col-9">
+                  <div class="name-product text-uppercase">
+                    {{ product.name }}
+                  </div>
+                  <div class="price-product">
+                    <span class="">{{
+                      fomatCurrency(product.discount)
+                    }}</span>
+                    <span
+                      class="ml-1 font-weight-light btn-sm"
+                      v-if="product.price != product.discount"
+                      ><del>{{ fomatCurrency(product.price) }}</del></span
+                    >
+                  </div>
+                </div>
+                <div class="picture-product col-3">
+                  <img height="50px" :src="product.imageUrl" alt="" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- modal-content -->
@@ -147,7 +180,26 @@
   </div>
 </template>
 <script>
+import { store } from "@/store";
 export default {
+  data: () => {
+    return {
+      name: "",
+      id: "",
+    };
+  },
+  computed: {
+    productSearch() {
+      return store.state.product.productSearch;
+    },
+  },
+  methods: {
+    searchProduct() {
+      const data = { id: this.id, name: this.name };
+      console.log(data);
+      store.dispatch("product/getProductByName", data);
+    },
+  },
   created() {
     document.addEventListener("scroll", () => {
       if (window.scrollY > 0) {
@@ -161,6 +213,9 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  padding-bottom: 20px;
+}
 .top-bar {
   display: flex;
   justify-content: space-around;
@@ -172,6 +227,7 @@ export default {
   padding: 10px 60px;
   justify-content: center;
   z-index: 2;
+  align-items: center;
 }
 
 .mid-header > div {
@@ -263,10 +319,14 @@ export default {
 }
 
 .modal-header {
-  margin-top:  20px;
+  margin-top: 20px;
   border: none;
 }
-
+.item-search {
+  padding: 10px 5px;
+  display: flex;
+  border-bottom: 1px solid #eeeeee;
+}
 @keyframes fadeInDown {
   0% {
     opacity: 0;

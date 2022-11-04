@@ -7,17 +7,26 @@ export const product = {
   namespaced: true,
   state: {
     products: null,
+    productSearch: null,
   },
   mutations: {
     getAllProduct(state, products) {
       state.products = products;
     },
+    getProductByName(state, products) {
+      state.productSearch = products;
+    },
   },
   actions: {
     getAllProduct({ commit }) {
-        productService.getAllProduct().then((products) => {
-          commit("getAllProduct", products.products);
-        });
-      },
+      productService.getAllProduct().then((products) => {
+        commit("getAllProduct", products.products);
+      });
+    },
+    getProductByName({ commit }, productReq) {
+      productService.searchByProductName(productReq).then((products) => {
+        commit("getProductByName", products);
+      });
+    },
   },
 };

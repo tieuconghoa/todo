@@ -3,6 +3,7 @@ import { constants } from "@/constants";
 
 export const productService = {
   getAllProduct,
+  searchByProductName,
 };
 
 function getAllProduct() {
@@ -14,6 +15,23 @@ function getAllProduct() {
     },
   };
   return fetch(`${constants.API_URL}/product`, headerOptions)
+    .then((response) => response.json())
+    .catch((err) => {
+      return err;
+    });
+}
+
+function searchByProductName(productReq) {
+  const token = store.state.authentication.token;
+  const headerOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(productReq),
+  };
+  return fetch(`${constants.API_URL}/product/searchByName`, headerOptions)
     .then((response) => response.json())
     .catch((err) => {
       return err;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +70,20 @@ public class ProductService {
         productResp.setProducts(productDataList);
 
         return productResp;
+    }
+
+    /**
+     * 
+     * @param productRequest
+     * @return
+     */
+    public List<Product> getProductByName(ProductRequest productRequest) {
+        List<Product> productList = new ArrayList<Product>();
+        if(Strings.isNotEmpty(productRequest.getName())) {
+            productList = productRepository.findByNameContains(productRequest.getName());
+        }
+        
+        return productList;
     }
 
 }

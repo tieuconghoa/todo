@@ -4,26 +4,34 @@
     <div class="product-name mt-2">{{ product.name }}</div>
     <div>
       <span class="text-danger font-weight-bold">{{
-        this.fomatCurrency(product.discount)
+        fomatCurrency(product.discount)
       }}</span>
-      <span class="ml-1 font-weight-light" v-if="product.price !=product.discount"
-        ><del>{{ this.fomatCurrency(product.price) }}</del></span
+      <span
+        class="ml-1 font-weight-light"
+        v-if="product.price != product.discount"
+        ><del>{{ fomatCurrency(product.price) }}</del></span
       >
-      <span class="ml-1 text-muted font-weight-lighter btn-sm" v-if="product.price !=product.discount"
-        >{{ this.caculateSaleOff(product.price, product.discount) }}% OFF</span
+      <span
+        class="ml-1 text-muted font-weight-lighter btn-sm"
+        v-if="product.price != product.discount"
+        >{{ caculateSaleOff(product.price, product.discount) }}%
+        OFF</span
       >
     </div>
     <div class="row" v-show="product.reviewCount > 0">
       <div class="col-6">
         <div class="star-rating">
-          <div class="back-stars" :title="product.rate*20 + '%'">
+          <div class="back-stars" :title="product.rate * 20 + '%'">
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
 
-            <div class="front-stars" :style="{ width: product.rate*20 + '%' }">
+            <div
+              class="front-stars"
+              :style="{ width: product.rate * 20 + '%' }"
+            >
               <i class="fa fa-star" aria-hidden="true"></i>
               <i class="fa fa-star" aria-hidden="true"></i>
               <i class="fa fa-star" aria-hidden="true"></i>
@@ -33,11 +41,14 @@
           </div>
         </div>
       </div>
-      <div class="col-6 count-review text-right">{{ product.reviewCount }} review</div>
+      <div class="col-6 count-review text-right">
+        {{ product.reviewCount }} review
+      </div>
     </div>
   </div>
 </template>
 <script>
+import {caculateSaleOff, fomatCurrency} from "@/commons";
 export default {
   props: ["product_prop"],
   computed: {
@@ -45,23 +56,11 @@ export default {
       return this.product_prop;
     },
   },
-  methods: {
-    caculateSaleOff(price, discount) {
-      let num = (price - discount) / price;
-      return Math.round(num * 100);
-    },
-    fomatCurrency(number) {
-      number = number.toLocaleString("en-US", {
-        style: "currency",
-        currency: "VND",
-      });
-      return number;
-    },
-  },
 };
 </script>
 <style scoped>
-.star-rating, .count-review {
+.star-rating,
+.count-review {
   display: flex;
   align-items: center;
   font-size: 1em;
