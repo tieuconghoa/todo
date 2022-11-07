@@ -58,7 +58,7 @@
                   <path d="M12,2c3,0,3,2.3,3,4h2c0-2.8-1-6-5-6S7,3.2,7,6h2C9,4.3,9,2,12,2z"></path>
                 </g>
               </svg>
-              <span class="count-holder"><span class="count">0</span></span>
+              <span class="count-holder"><span class="count">11</span></span>
             </span>
           </div>
         </div>
@@ -214,7 +214,7 @@ export default {
   text-align: right;
 }
 
-.icon-menu span {
+.icon-menu > span {
   padding: 0 0.5rem;
 }
 
@@ -245,6 +245,10 @@ export default {
 
 .scrollable .mid-header .icon-menu {
   padding-top: 10px;
+}
+.modal-open .icon-menu {
+  padding-right: 420px;
+  transition: all 1s;
 }
 
 .form-search-mobile {
@@ -324,11 +328,13 @@ export default {
 
 .count-holder {
   position: absolute;
-  top: 7px;
+  top: 8px;
   left: 0;
   right: 0;
   font-size: 14px;
   text-align: center;
+  font-weight: bold;
+  line-height: 1;
   height: 17px;
   overflow: hidden;
 }
