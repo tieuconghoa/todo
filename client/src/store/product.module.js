@@ -8,6 +8,7 @@ export const product = {
   state: {
     products: null,
     productSearch: null,
+    productCart: null
   },
   mutations: {
     getAllProduct(state, products) {

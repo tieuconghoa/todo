@@ -36,7 +36,7 @@
                   clip-rule="evenodd" />
               </svg>
             </span>
-            <span class="icon-search" data-toggle="modal" data-target="#myModal2">
+            <span class="icon-search" data-toggle="modal" data-target="#modalSearch">
               <svg version="1.1" class="svg-search" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27"
                 style="enable-background:new 0 0 24 27;" xml:space="preserve">
@@ -47,7 +47,7 @@
                   height="8"></rect>
               </svg>
             </span>
-            <span class="cart-menu icon-cart">
+            <span class="cart-menu icon-cart" data-toggle="modal" data-target="#modalCart">
               <svg version="1.1" class="svg-cart" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27"
                 style="enable-background:new 0 0 24 27;" xml:space="preserve">
@@ -105,7 +105,7 @@
         </div>
       </header>
     </div>
-    <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal right fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="modalSearchLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -148,6 +148,43 @@
       </div>
       <!-- modal-dialog -->
     </div>
+    <div class="modal right fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="modalCart">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel2">GIỎ HÀNG</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="cart-list">
+              <div class="item-search row" v-for="product in this.productCart" :key="product.id">
+                <div class="text-left col-9">
+                  <div class="name-product text-uppercase">
+                    {{ product.name }}
+                  </div>
+                  <div class="price-product">
+                    <span class="">{{
+                        fomatCurrency(product.discount)
+                    }}</span>
+                    <span class="ml-1 font-weight-light btn-sm" v-if="product.price != product.discount"><del>{{
+                        fomatCurrency(product.price)
+                    }}</del></span>
+                  </div>
+                </div>
+                <div class="picture-product col-3">
+                  <img height="50px" :src="product.imageUrl" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal-content -->
+      </div>
+      <!-- modal-dialog -->
+    </div>
   </div>
 </template>
 <script>
@@ -163,6 +200,9 @@ export default {
     productSearch() {
       return store.state.product.productSearch;
     },
+    productCart() {
+       return store.state.product.productCart;
+    }
   },
   methods: {
     searchProduct() {
@@ -216,6 +256,7 @@ export default {
 
 .icon-menu > span {
   padding: 0 0.5rem;
+  cursor: pointer;
 }
 
 .list-menu {
@@ -246,8 +287,9 @@ export default {
 .scrollable .mid-header .icon-menu {
   padding-top: 10px;
 }
-.modal-open .icon-menu {
-  padding-right: 420px;
+
+.modal-open .scrollable .icon-menu {
+   padding-right: 420px;
   transition: all 1s;
 }
 

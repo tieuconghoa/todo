@@ -1,7 +1,7 @@
 <template>
-  <div class="col-md-4 col-lg-3 col-sm-6 mb-5">
+  <div class="col-md-4 col-lg-3 col-sm-6 mb-5 product-item" @click="viewDetail">
     <img width="300" height="400" class="img-fluid" :src="product.imageUrl" />
-    <div class="product-name mt-2">{{ product.name }}</div>
+    <div class="product-name mt-2 font-weight-bold">{{ product.name }}</div>
     <div>
       <span class="text-danger font-weight-bold">{{
         fomatCurrency(product.discount)
@@ -9,14 +9,7 @@
       <span
         class="ml-1 font-weight-light"
         v-if="product.price != product.discount"
-        ><del>{{ fomatCurrency(product.price) }}</del></span
-      >
-      <span
-        class="ml-1 text-muted font-weight-lighter btn-sm"
-        v-if="product.price != product.discount"
-        >{{ caculateSaleOff(product.price, product.discount) }}%
-        OFF</span
-      >
+        ><del>{{ fomatCurrency(product.price) }}</del></span>
     </div>
     <div class="row" v-show="product.reviewCount > 0">
       <div class="col-6">
@@ -48,12 +41,17 @@
   </div>
 </template>
 <script>
-import {caculateSaleOff, fomatCurrency} from "@/commons";
+import { caculateSaleOff, fomatCurrency } from "@/commons";
 export default {
   props: ["product_prop"],
   computed: {
     product() {
       return this.product_prop;
+    },
+  },
+  methods: {
+    viewDetail() {
+      this.$router.push(`/product/${this.product_prop.id}`);
     },
   },
 };
@@ -79,5 +77,9 @@ export default {
   position: absolute;
   top: 0;
   transition: all 0.5s;
+}
+.product-item {
+  cursor: pointer;
+  text-align: left;
 }
 </style>
