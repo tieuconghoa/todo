@@ -8,7 +8,8 @@ export const product = {
   state: {
     products: null,
     productSearch: null,
-    productCart: null
+    productCart: [],
+    productDetail: null,
   },
   mutations: {
     getAllProduct(state, products) {
@@ -17,6 +18,9 @@ export const product = {
     getProductByName(state, products) {
       state.productSearch = products;
     },
+    getProductDetail(state, product) {
+      state.productDetail = product;
+    }
   },
   actions: {
     getAllProduct({ commit }) {
@@ -27,6 +31,11 @@ export const product = {
     getProductByName({ commit }, productReq) {
       productService.searchByProductName(productReq).then((products) => {
         commit("getProductByName", products);
+      });
+    },
+    getProductDetail({ commit }, productId) {
+      productService.getProductDetail(productId).then((product) => {
+        commit("getProductDetail", product);
       });
     },
   },

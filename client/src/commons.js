@@ -6,11 +6,15 @@ Vue.mixin({
       return Math.round(num * 100);
     },
     fomatCurrency: (number) => {
-      number = number.toLocaleString("de-DE", {
-        style: "currency",
-        currency: "VND",
-      });
-      return number;
-    },
+      if(number) {
+        number = number.toLocaleString("de-DE", {
+          style: "currency",
+          currency: "VND",
+        });
+        return number;
+      } else {
+        return 0;
+      } 
   },
+}
 });

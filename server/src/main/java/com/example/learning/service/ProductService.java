@@ -2,20 +2,25 @@ package com.example.learning.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.learning.entity.Category;
+import com.example.learning.entity.ImageProduct;
 import com.example.learning.entity.Product;
 import com.example.learning.entity.ReviewProduct;
+import com.example.learning.model.ProductDetailResponse;
 import com.example.learning.model.ProductRequest;
 import com.example.learning.model.ProductResponse;
 import com.example.learning.model.ProductResponse.ProductDataDTO;
 import com.example.learning.repository.CategoryRepository;
+import com.example.learning.repository.ImageProductRepository;
 import com.example.learning.repository.ProductRepository;
 import com.example.learning.repository.ReviewProductRepository;
 
@@ -30,6 +35,9 @@ public class ProductService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    
+    @Autowired
+    private ImageProductRepository imgRepository;
 
     /**
      * 
@@ -84,6 +92,24 @@ public class ProductService {
         }
         
         return productList;
+    }
+
+    public ProductDetailResponse getProductDetail(String id) {
+        Integer productId = Integer.parseInt(id);
+        ProductDetailResponse productResp =  new ProductDetailResponse();
+        Product product = productRepository.findById(productId).get();
+        List<ImageProduct> imgProduct = imgRepository.findByProductId(productId);
+        
+        BeanUtils.copyProperties(product, productResp);
+        
+        List<String> listImg = new ArrayList<String>();
+        
+        for(ImageProduct img : imgProduct) {
+            listImg.add(img.getUrl());
+        }
+        
+         productResp.setImageUrl(listImg);
+        return productResp;
     }
 
 }
