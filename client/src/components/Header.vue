@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header">
+    <div id="header" class="header">
       <div class="top-bar">
         <div class="container">
           <div class="row">
@@ -347,18 +347,17 @@ export default {
       for (let i = 0; i < productCart.length; i++) {
         sum += productCart[i].discount * productCart[i].count;
       }
-      console.log(productCart.length);
       return sum;
     },
   },
   created() {
-    document.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
+    window.onscroll = () => {
+      if ($(window).scrollTop() > 56) {
         $(".header").addClass("scrollable");
       } else {
         $(".header").removeClass("scrollable");
       }
-    });
+    };
   },
 };
 </script>

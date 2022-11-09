@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="row">
+  <div>
+    <div class="row mx-0">
       <div class="col-6 d-flex">
         <div class="small-img-row col-3">
           <div class="small-img-col" v-for="img in product.imageUrl" :key="img">
