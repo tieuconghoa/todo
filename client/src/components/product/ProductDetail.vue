@@ -132,26 +132,26 @@ export default {
     vueImageZoomer,
   },
   computed: {
-    product() {
-      return store.state.product.productDetail;
+    product : function() {
+      return store.state.product?.productDetail || [];
     },
   },
   methods: {
     addToCart() {
       let size = $(".sb").text();
-      store.state.product.productCart.push(
+      store.dispatch("product/addItemShoppingCart",(
         JSON.parse(
           JSON.stringify({
             product_id: this.$route.params.name,
             price: this.product.price,
             name: this.product.name,
             discount: this.product.discount,
-            imageUrl: this.product.imageUrl[0],
+            imageUrl: this.product.imageUrl,
             size: size,
             count: this.count,
           })
         )
-      );
+      ));
     },
     changeImg(event) {
       this.urlZoom = event.target.src;

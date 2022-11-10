@@ -277,7 +277,7 @@
                     {{ product.name }}
                     <div class="float-right">
                       <button type="button" class="close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true" @click="deleteShoppingCart(product.product_id, product.size)">×</span>
                       </button>
                     </div>
                   </div>
@@ -305,7 +305,7 @@
               <div class="mt-1 shipping text-left">
                 <span class="">Freeship</span>
               </div>
-              <div class="payment mt-4">
+              <div class="payment mt-4" v-if="productCart?.length > 0">
                 <button class="btn btn-danger">Thanh Toán</button>
                 <button class="btn btn-danger ml-3">Xem Giỏ Hàng</button>
               </div>
@@ -353,6 +353,15 @@ export default {
       }
       return sum;
     },
+    deleteShoppingCart(product_id, product_size) {
+      // console.log(product_id, size);
+      store.dispatch("product/deleteItemShoppingCart", JSON.parse(
+          JSON.stringify({
+            product_id: product_id,
+            product_size: product_size,
+          })
+        ))
+    }
   },
   created() {
     window.onscroll = () => {
