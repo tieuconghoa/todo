@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="">
     <div class="row mx-0">
       <div class="col-6 d-flex">
         <div class="small-img-row col-3">
-          <div class="small-img-col" v-for="img in product.imageUrl" :key="img">
+          <div class="small-img-col" v-for="img in product.imageUrlList" :key="img">
             <img
               :src="img"
               alt=""
@@ -14,7 +14,13 @@
           </div>
         </div>
         <div class="col-9">
-          <img :src="product.imageUrl[0]" alt="" width="100%" id="ProductImg" />
+          <vue-image-zoomer
+            :regular="urlZoom == '' ? product.imageUrl : urlZoom"
+            :zoom="urlZoom == '' ? product.imageUrl : urlZoom"
+            :zoom-amount="3"
+            img-class="img-fluid"
+          >
+          </vue-image-zoomer>
         </div>
       </div>
       <div class="col-6">
@@ -32,8 +38,11 @@
         <div class="form-inline">
           <div class="form-check form-check-inline form-choose-size">
             <div class="size size-s">
-              <input type="radio" id="swatch-s" name="size" value="S" />
-              <label class="form-check-label" @click="changeSize" for="swatch-s"
+              <input type="radio" id="swatch-s" name="size" value="S" checked />
+              <label
+                class="form-check-label sb"
+                @click="changeSize"
+                for="swatch-s"
                 >S</label
               >
             </div>
@@ -110,12 +119,17 @@
 </template>
 <script>
 import { store } from "@/store";
+import vueImageZoomer from "vue-image-zoomer";
 import { caculateSaleOff, fomatCurrency } from "@/commons";
 export default {
   data: () => {
     return {
       count: 1,
+      urlZoom: "",
     };
+  },
+  components: {
+    vueImageZoomer,
   },
   computed: {
     product() {
@@ -126,19 +140,21 @@ export default {
     addToCart() {
       let size = $(".sb").text();
       store.state.product.productCart.push(
-        JSON.parse(JSON.stringify({
-          product_id: this.$route.params.name,
-          price : this.product.price,
-          name : this.product.name,
-          discount: this.product.discount,
-          imageUrl: this.product.imageUrl[0],
-          size: size,
-          count: this.count,
-        }))
+        JSON.parse(
+          JSON.stringify({
+            product_id: this.$route.params.name,
+            price: this.product.price,
+            name: this.product.name,
+            discount: this.product.discount,
+            imageUrl: this.product.imageUrl[0],
+            size: size,
+            count: this.count,
+          })
+        )
       );
     },
     changeImg(event) {
-      document.getElementById("ProductImg").src = event.target.src;
+      this.urlZoom = event.target.src;
     },
     changeSize(event) {
       $(".form-check-label").removeClass("sb");

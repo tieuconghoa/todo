@@ -132,9 +132,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Chủ đề 1</a>
-                </li>
+                <router-link class="link" to="/product">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Sản phẩm</a>
+                  </li>
+                </router-link>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Chủ đề 2</a>
                 </li>
@@ -296,7 +298,9 @@
             <div class="cart-total">
               <div class="total d-flex justify-content-between">
                 <span class="text-left">TỔNG CỘNG:</span>
-                <span class="text-right mt-1">{{ fomatCurrency(caculateTotal()) }}</span>
+                <span class="text-right mt-1">{{
+                  fomatCurrency(caculateTotal())
+                }}</span>
               </div>
               <div class="mt-1 shipping text-left">
                 <span class="">Freeship</span>

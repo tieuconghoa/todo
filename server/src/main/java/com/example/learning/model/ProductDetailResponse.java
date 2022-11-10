@@ -18,7 +18,9 @@ public class ProductDetailResponse {
 
     public String category;
 
-    public List<String> imageUrl;
+    public String imageUrl;
+
+    public List<String> imageUrlList;
 
     public BigDecimal price;
 
