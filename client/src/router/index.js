@@ -11,11 +11,11 @@ import { store } from "../store";
 
 Vue.use(VueRouter);
 const routes = [
-  {
-    path: "/",
-    name: "Welcome",
-    component: Welcome,
-  },
+  // {
+  //   path: "/",
+  //   name: "Welcome",
+  //   component: Welcome,
+  // },
   {
     path: "/login",
     name: "Login",
@@ -30,6 +30,11 @@ const routes = [
     path: "/todo",
     name: "Todo",
     component: Todo,
+  },
+  {
+    path: "/",
+    name: "Product",
+    component: ProductList,
   },
   {
     path: "/product",
@@ -51,7 +56,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ["/login", "/"];
-  const authRequired = !publicPages.includes(to.path);
+  const authRequired = !publicPages.includes(to.path) && !"Detail" == to.name;
   const loggedIn = store.state.authentication.token;
 
   if (authRequired && !loggedIn) {

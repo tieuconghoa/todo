@@ -12,7 +12,7 @@ function getAllProduct() {
   const headerOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
     },
   };
   return fetch(`${constants.API_URL}/product`, headerOptions)
@@ -28,7 +28,7 @@ function searchByProductName(productReq) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(productReq),
   };
@@ -45,7 +45,7 @@ function getProductDetail(productId) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
     },
   };
   return fetch(`${constants.API_URL}/product/${productId}`, headerOptions)

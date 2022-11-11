@@ -217,7 +217,7 @@
                 v-for="product in this.productSearch"
                 :key="product.id"
               >
-                <div class="text-left col-9">
+                <div class="text-left col-9" @click="viewDetail(product.id)">
                   <div class="name-product text-uppercase">
                     {{ product.name }}
                   </div>
@@ -305,7 +305,7 @@
               <div class="mt-1 shipping text-left">
                 <span class="">Freeship</span>
               </div>
-              <div class="payment mt-4" v-if="productCart?.length > 0">
+              <div class="payment mt-4" v-if="productCart.length > 0">
                 <button class="btn btn-danger">Thanh Toán</button>
                 <button class="btn btn-danger ml-3">Xem Giỏ Hàng</button>
               </div>
@@ -340,6 +340,10 @@ export default {
     searchProduct() {
       const data = { id: this.id, name: this.name };
       store.dispatch("product/getProductByName", data);
+    },
+     viewDetail(product_id) {
+      // $(".close").click();
+      this.$router.push({ path: `/product/${product_id}`});
     },
     clearSearch() {
       this.name = null;
@@ -508,6 +512,7 @@ export default {
   padding: 10px 5px;
   display: flex;
   border-bottom: 1px solid #eeeeee;
+  cursor: pointer;
 }
 
 .icon-cart svg,

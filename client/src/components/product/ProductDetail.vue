@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="row mx-0">
-      <div class="col-6 d-flex">
+      <div class="col-md-6 col-xs-12 d-flex">
         <div class="small-img-row col-3">
           <div class="small-img-col" v-for="img in product.imageUrlList" :key="img">
             <img
@@ -23,7 +23,7 @@
           </vue-image-zoomer>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-md-6 col-xs-12">
         <h1 class="text-left">{{ product.name }}</h1>
         <div class="h4 text-left">
           <span class="text-danger font-weight-bold">{{
@@ -154,6 +154,8 @@ export default {
       ));
     },
     changeImg(event) {
+      $(".small-img").removeClass("active");
+      event.target.classList.add("active");
       this.urlZoom = event.target.src;
     },
     changeSize(event) {
@@ -195,6 +197,10 @@ input:focus {
   width: auto;
   height: 100px;
   margin: 0 0 10px 10px;
+}
+
+.small-img.active {
+  border: 1px solid #808283;
 }
 
 .btn-card {

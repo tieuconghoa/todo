@@ -107,8 +107,10 @@ public class ProductService {
         for(ImageProduct img : imgProduct) {
             listImg.add(img.getUrl());
         }
-        
-         productResp.setImageUrlList(listImg);
+        if(listImg.size() > 0) {
+            productResp.setImageUrl(listImg.get(0));
+        }
+        productResp.setImageUrlList(listImg);
         return productResp;
     }
 
