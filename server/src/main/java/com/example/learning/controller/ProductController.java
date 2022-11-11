@@ -23,7 +23,6 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @CrossOrigin("http://localhost:8081")
     @RequestMapping(value = "/api/product", method = RequestMethod.GET)
     public ResponseEntity<ProductResponse> getProduct(ProductRequest productRequest) {
 
@@ -32,7 +31,6 @@ public class ProductController {
         return ResponseEntity.ok().body(products);
     }
 
-    @CrossOrigin("http://localhost:8081")
     @RequestMapping(value = "/api/product/searchByName", method = RequestMethod.POST)
     public ResponseEntity<List<Product>> getProductByName(@RequestBody ProductRequest productRequest) {
 
@@ -41,7 +39,6 @@ public class ProductController {
         return ResponseEntity.ok().body(productList);
     }
     
-    @CrossOrigin("http://localhost:8081")
     @RequestMapping(value = "/api/product/{id}", method = RequestMethod.POST)
     public ResponseEntity<ProductDetailResponse> getProductDetail(@PathVariable String id) {
         ProductDetailResponse productList = service.getProductDetail(id);

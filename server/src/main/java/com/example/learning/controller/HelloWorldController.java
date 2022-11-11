@@ -15,7 +15,6 @@ public class HelloWorldController {
 
 
     @RequestMapping({ "/hello" })
-    @CrossOrigin("http://localhost:8080")
     public ResponseEntity<?> helloWorld() {
 
         Authentication authentication = (Authentication) SecurityContextHolder.getContext()

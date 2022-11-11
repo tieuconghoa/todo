@@ -99,7 +99,7 @@ public class ProductService {
         ProductDetailResponse productResp =  new ProductDetailResponse();
         Product product = productRepository.findById(productId).get();
         List<ImageProduct> imgProduct = imgRepository.findByProductId(productId);
-        
+        List<Category> category = categoryRepository.findAll();
         BeanUtils.copyProperties(product, productResp);
         
         List<String> listImg = new ArrayList<String>();
@@ -110,6 +110,8 @@ public class ProductService {
         if(listImg.size() > 0) {
             productResp.setImageUrl(listImg.get(0));
         }
+        productResp.setCategory(category.stream().filter(ct -> ct.getId() == product.getCategory())
+                .collect(Collectors.toList()).get(0).getName());
         productResp.setImageUrlList(listImg);
         return productResp;
     }

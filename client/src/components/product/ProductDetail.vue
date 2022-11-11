@@ -115,11 +115,19 @@
         </p>
       </div>
     </div>
+    <div>
+      <div class="h1 mt-5 relate-product"><span>CÁC SẢN PHẨM TƯƠNG TỰ</span></div>
+      <div class="row product-relation mt-5">
+         <ProductItem v-for="item in products.filter((i) => { return i.category == product.category && i.id != product.id})" :product_prop="item"
+        :key="item.id" />
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import { store } from "@/store";
 import vueImageZoomer from "vue-image-zoomer";
+import ProductItem from "./ProductItem.vue";
 import { caculateSaleOff, fomatCurrency } from "@/commons";
 export default {
   data: () => {
@@ -130,8 +138,12 @@ export default {
   },
   components: {
     vueImageZoomer,
+    ProductItem
   },
   computed: {
+    products : function() {
+      return store.state.product?.products || [];
+    },
     product : function() {
       return store.state.product?.productDetail || [];
     },
@@ -249,5 +261,19 @@ input:focus {
 .input-group-text {
   cursor: pointer;
   border-radius: 0;
+}
+.relate-product {
+   width: 100%; 
+   border-bottom: 1px solid #000; 
+   line-height: 0.2em;
+   margin: 10px 0 20px; 
+} 
+
+.relate-product span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+.product-relation .sale-off{
+  left : 110px
 }
 </style>
