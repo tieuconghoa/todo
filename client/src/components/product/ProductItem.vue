@@ -28,7 +28,7 @@ export default {
     viewDetail() {
       this.$router.push(`/product/${this.product_prop.id}`);
     },
-  },
+  }
 };
 </script>
 <style scoped>

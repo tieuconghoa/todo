@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login'"/>
-    <router-view />
+    <router-view :key="$route.fullPath"></router-view>
   </div>
 </template>
 <script>
@@ -9,9 +9,6 @@ import Header from "@/components/Header.vue";
 export default {
   components: { Header },
   methods : {
-    // scrollBar() {
-    //  console.log("aaa");
-    // }
   }
 };
 </script>

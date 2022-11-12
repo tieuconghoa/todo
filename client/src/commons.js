@@ -14,7 +14,6 @@ Vue.mixin({
         return number;
       } else {
         return 0;
-      } 
+      } },
   },
-}
 });

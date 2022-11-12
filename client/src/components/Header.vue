@@ -238,10 +238,7 @@ export default {
     viewDetail(product_id) {
       // $(".close").click();
       this.$router.push({
-        path: `/product/${product_id}`,
-        query: {
-          t: new Date().getTime()
-        }
+        path: `/product/${product_id}`
       }).catch((err)=>{console.log(err)});
     },
     clearSearch() {
