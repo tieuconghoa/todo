@@ -80,23 +80,35 @@
     <div>
       <div class="h3 mt-5 relate-product"><span>CÁC SẢN PHẨM TƯƠNG TỰ</span></div>
       <div class="text-center my-3 mt-5">
-        <div class="row mx-auto my-auto">
-          <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100 container" role="listbox">
-              <div class="carousel-item" :class="item.id == products[0].id ? 'active' : ''" v-for="item in products"
-                :key="item.id">
-                <ProductItem :product_prop="item" :key="item.id" />
+        <div id="carouselExampleControls" class="carousel" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item" :class="item.id == products[0].id ? 'active' : ''" v-for="item in products"
+              :key="item.id">
+              <div class="px-2">
+                <div class="img-fluid product-item" @click="viewDetail(item.id)"><img :src="item.imageUrl" class="d-block w-100" alt="..."> </div>
+                <div class="sale-off" v-if="caculateSaleOff(product.price, product.discount) > 0">{{
+                    caculateSaleOff(product.price, product.discount)
+                }}%</div>
+                <div class="product-name mt-2 font-weight-bold">{{ product.name }}</div>
+                <div>
+                  <span class="text-danger font-weight-bold">{{
+                      fomatCurrency(product.discount)
+                  }}</span>
+                  <span class="ml-1 font-weight-light btn-sm" v-if="product.price != product.discount"><del>{{
+                      fomatCurrency(product.price)
+                  }}</del></span>
+                </div>
               </div>
             </div>
-            <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
           </div>
+          <a class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </div>
 
@@ -153,19 +165,13 @@ export default {
       $(".form-check-label").removeClass("sb");
       event.target.classList.add("sb");
     },
+    viewDetail(product_id) {
+      this.$router.push(`/product/${product_id}`);
+    },
   },
   created() {
     store.dispatch("product/getProductDetail", this.$route.params.name);
   },
-  mounted() {
-    const plugin = document.createElement("script");
-    plugin.setAttribute(
-      "src",
-      "../script.js"
-    );
-    plugin.async = true;
-    document.head.appendChild(plugin);
-  }
 };
 </script>
 <style>
@@ -276,32 +282,57 @@ input:focus {
   left: 110px
 }
 
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-  display: flex;
+.carousel-inner {
+  padding: 1em;
 }
 
-.carousel-inner .carousel-item-right.active,
-.carousel-inner .carousel-item-next {
-  transform: translateX(25%);
+.card {
+  margin: 0 0.5em;
+  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+  border: none;
 }
 
-.carousel-inner .carousel-item-left.active,
-.carousel-inner .carousel-item-prev {
-  transform: translateX(-25%);
-}
-
-.carousel-inner .carousel-item-right,
-.carousel-inner .carousel-item-left {
-  transform: translateX(0);
-}
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  padding: 30px;
-  background-color: #000;
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: #e1e1e1;
+  width: 6vh;
+  height: 6vh;
   border-radius: 50%;
-  color: #fff;
-  background-size: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.visually-hidden {
+  visibility: hidden;
+}
+
+@media (min-width: 768px) {
+  .carousel-item {
+    margin-right: 0;
+    flex: 0 0 25%;
+    display: block;
+  }
+
+  .carousel-inner {
+    display: flex;
+  }
+}
+
+.card .img-wrapper {
+  max-width: 100%;
+  height: 13em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card img {
+  max-height: 100%;
+}
+
+@media (max-width: 767px) {
+  .card .img-wrapper {
+    height: 17em;
+  }
 }
 </style>

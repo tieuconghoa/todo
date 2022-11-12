@@ -54,9 +54,6 @@ export default {
   transition: all 0.5s;
 }
 
-.product-item img {
-  cursor: pointer;
-}
 .sale-off {
   position: absolute;
   top: 10px;
