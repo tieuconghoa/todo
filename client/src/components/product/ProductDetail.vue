@@ -172,6 +172,15 @@ export default {
   created() {
     store.dispatch("product/getProductDetail", this.$route.params.name);
   },
+  mounted() {
+    const plugin = document.createElement("script");
+    plugin.setAttribute(
+      "src",
+      "../script.js"
+    );
+    plugin.async = true;
+    document.head.appendChild(plugin);
+  }
 };
 </script>
 <style>
