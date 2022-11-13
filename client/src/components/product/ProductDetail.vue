@@ -151,7 +151,7 @@ export default {
       return store.state.product.products?.filter(item => { return item.category == store.state.product.productDetail?.category && item.id != store.state.product?.productDetail.id });
     },
     product: function () {
-      return store.state.product.productDetail || Object.assign({});
+      return store.state.product.productDetail || {};
     },
   },
   methods: {
@@ -187,7 +187,7 @@ export default {
   created() {
     store.dispatch("product/getProductDetail", this.$route.params.name);
   },
-  mounted() {
+  updated : function() {
     const plugin = document.createElement("script");
     plugin.setAttribute(
       "src",

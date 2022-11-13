@@ -7,7 +7,7 @@ export const productService = {
   getProductDetail
 };
 
-function getAllProduct() {
+async function getAllProduct() {
   const token = store.state.authentication.token;
   const headerOptions = {
     method: "GET",
@@ -15,14 +15,14 @@ function getAllProduct() {
       // Authorization: `Bearer ${token}`,
     },
   };
-  return fetch(`${constants.API_URL}/product`, headerOptions)
+  return await fetch(`${constants.API_URL}/product`, headerOptions)
     .then((response) => response.json())
     .catch((err) => {
       return err;
     });
 }
 
-function searchByProductName(productReq) {
+async function searchByProductName(productReq) {
   const token = store.state.authentication.token;
   const headerOptions = {
     method: "POST",
@@ -32,14 +32,14 @@ function searchByProductName(productReq) {
     },
     body: JSON.stringify(productReq),
   };
-  return fetch(`${constants.API_URL}/product/searchByName`, headerOptions)
+  return await fetch(`${constants.API_URL}/product/searchByName`, headerOptions)
     .then((response) => response.json())
     .catch((err) => {
       return err;
     });
 }
 
-function getProductDetail(productId) {
+async function getProductDetail(productId) {
   const token = store.state.authentication.token;
   const headerOptions = {
     method: "POST",
@@ -48,7 +48,7 @@ function getProductDetail(productId) {
       // Authorization: `Bearer ${token}`,
     },
   };
-  return fetch(`${constants.API_URL}/product/${productId}`, headerOptions)
+  return await fetch(`${constants.API_URL}/product/${productId}`, headerOptions)
     .then((response) => response.json())
     .catch((err) => {
       return err;
