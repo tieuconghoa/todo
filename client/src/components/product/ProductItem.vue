@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-4 col-lg-3 col-sm-6 mb-5 product-item">
-    <img @click="viewDetail"  height="400" class="mw-100" :src="product.imageUrl" />
+    <img @click="viewDetail"  height="400" class="mw-100" :src="product.image_url" />
     <div class="sale-off" v-if="caculateSaleOff(product.price, product.discount) > 0">{{ caculateSaleOff(product.price, product.discount) }}%</div>
     <div class="product-name mt-2 font-weight-bold">{{ product.name }}</div>
     <div>
@@ -54,15 +54,4 @@ export default {
   transition: all 0.5s;
 }
 
-.sale-off {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  background: #fff;
-  color: red;
-  padding: 2px 6px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: bold;
-}
 </style>

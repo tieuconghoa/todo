@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class ReviewProduct {
     @Column
     public int id;
 
+    @JsonProperty("product_id")
     @Column(name = "product_id")
     public int productId;
     @Column
@@ -34,9 +37,11 @@ public class ReviewProduct {
     @Column
     public int rate;
 
+    @JsonProperty("create_date")
     @Column(name = "create_date")
     public LocalDateTime createDate;
 
+    @JsonProperty("create_user")
     @Column(name = "create_user")
     public int createUser;
 }

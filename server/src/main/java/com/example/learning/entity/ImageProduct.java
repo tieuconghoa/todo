@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +22,7 @@ public class ImageProduct {
     @Column
     public int id;
     
+    @JsonProperty("product_id")
     @Column(name = "product_id")
     public int productId;
     

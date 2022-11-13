@@ -3,13 +3,13 @@
     <div class="row mx-0">
       <div class="col-md-6 col-xs-12 d-flex">
         <div class="small-img-row col-3">
-          <div class="small-img-col" v-for="img in product.imageUrlList" :key="img">
+          <div class="small-img-col" v-for="img in product.image_url_list" :key="img.id">
             <img :src="img" alt="" width="100%" class="small-img" @click="changeImg" />
           </div>
         </div>
         <div class="col-9">
-          <vue-image-zoomer :regular="urlZoom == '' ? product.imageUrl : urlZoom"
-            :zoom="urlZoom == '' ? product.imageUrl : urlZoom" :zoom-amount="3" img-class="img-fluid">
+          <vue-image-zoomer :regular="urlZoom == '' ? product.image_url : urlZoom"
+            :zoom="urlZoom == '' ? product.image_url : urlZoom" :zoom-amount="3" img-class="img-fluid">
           </vue-image-zoomer>
         </div>
       </div>
@@ -25,21 +25,10 @@
         </div>
         <div class="form-inline">
           <div class="form-check form-check-inline form-choose-size">
-            <div class="size size-s">
-              <input type="radio" id="swatch-s" name="size" value="S" checked />
-              <label class="form-check-label sb" @click="changeSize" for="swatch-s">S</label>
-            </div>
-            <div class="size size-m">
-              <input type="radio" id="swatch-m" name="size" value="M" />
-              <label class="form-check-label" @click="changeSize" for="swatch-m">M</label>
-            </div>
-            <div class="size size-l">
-              <input type="radio" id="swatch-l" name="size" value="L" />
-              <label class="form-check-label" @click="changeSize" for="swatch-l">L</label>
-            </div>
-            <div class="size size-xl">
-              <input type="radio" id="swatch-xl" name="size" value="XL" />
-              <label class="form-check-label" @click="changeSize" for="swatch-xl">XL</label>
+            <div v-for="size in product.product_size_list" :key="size.id" :class="'size size-' + size">
+              <input type="radio" :id="'swatch-' + size" name="size" value="S" />
+              <label class="form-check-label" :class="size == product.product_size_list[0] ? 'sb' : ''"
+                @click="changeSize" :for="'swatch-' + size">{{ size.product_size }}</label>
             </div>
           </div>
         </div>
@@ -70,32 +59,55 @@
           </button>
         </div>
 
-        <h3>Product Details</h3>
-        <br />
-        <p>
-          {{ product.detail }}
-        </p>
+        <h3 class="text-left mb-5">Mô tả</h3>
+        <table class="table table-responsive">
+          <tr class="text-left">
+            <td>Miêu tả</td>
+            <td>{{ product.product_description.product_description }}</td>
+          </tr>
+          <tr class="text-left">
+            <td>Chất liệu</td>
+            <td>{{ product.product_description.product_material }}</td>
+          </tr>
+          <tr class="text-left product-size">
+            <td>Kích thước</td>
+            <td>{{ product.product_description.product_size }}</td>
+          </tr>
+          <tr class="text-left">
+            <td>Kích thước của mẫu</td>
+            <td>{{ product.product_description.product_model_size }}</td>
+          </tr>
+          <tr class="text-left">
+            <td>Phụ kiện đi kèm</td>
+            <td><span v-if="product.product_description.product_accessory">{{ (products.filter(item => {
+                return item.id
+                  == product.product_description.product_accessory
+              }))[0].name
+            }}</span></td>
+          </tr>
+        </table>
       </div>
     </div>
     <div>
       <div class="h3 mt-5 relate-product"><span>CÁC SẢN PHẨM TƯƠNG TỰ</span></div>
       <div class="text-center my-3 mt-5">
-        <div id="carouselExampleControls" class="carousel" data-bs-ride="carousel">
+        <div v-if="relateProducts" id="carouselExampleControls" class="carousel" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item" :class="item.id == products[0].id ? 'active' : ''" v-for="item in products"
-              :key="item.id">
+            <div class="carousel-item" :class="item.id == relateProducts[0].id ? 'active' : ''"
+              v-for="item in relateProducts" :key="item.id">
               <div class="px-2">
-                <div class="img-fluid product-item" @click="viewDetail(item.id)"><img :src="item.imageUrl" class="d-block w-100" alt="..."> </div>
-                <div class="sale-off" v-if="caculateSaleOff(product.price, product.discount) > 0">{{
-                    caculateSaleOff(product.price, product.discount)
+                <div class="img-fluid product-item" @click="viewDetail(item.id)"><img :src="item.image_url"
+                    class="d-block w-100" alt="..."> </div>
+                <div class="sale-off" v-if="caculateSaleOff(item.price, item.discount) > 0">{{
+                    caculateSaleOff(item.price, item.discount)
                 }}%</div>
-                <div class="product-name mt-2 font-weight-bold">{{ product.name }}</div>
+                <div class="product-name mt-2 font-weight-bold">{{ item.name }}</div>
                 <div>
                   <span class="text-danger font-weight-bold">{{
-                      fomatCurrency(product.discount)
+                      fomatCurrency(item.discount)
                   }}</span>
-                  <span class="ml-1 font-weight-light btn-sm" v-if="product.price != product.discount"><del>{{
-                      fomatCurrency(product.price)
+                  <span class="ml-1 font-weight-light btn-sm" v-if="item.price != item.discount"><del>{{
+                      fomatCurrency(item.price)
                   }}</del></span>
                 </div>
               </div>
@@ -133,10 +145,13 @@ export default {
   },
   computed: {
     products: function () {
-      return store.state.product.products?.filter(item => { return item.category == store.state.product.productDetail?.category && item.id != store.state.product?.productDetail.id }) || [];
+      return store.state.product?.products || [];
+    },
+    relateProducts: function () {
+      return store.state.product.products?.filter(item => { return item.category == store.state.product.productDetail?.category && item.id != store.state.product?.productDetail.id });
     },
     product: function () {
-      return store.state.product?.productDetail || [];
+      return store.state.product.productDetail || Object.assign({});
     },
   },
   methods: {
@@ -149,7 +164,7 @@ export default {
             price: this.product.price,
             name: this.product.name,
             discount: this.product.discount,
-            imageUrl: this.product.imageUrl,
+            image_url: this.product.image_url,
             size: size,
             count: this.count,
           })
@@ -178,7 +193,7 @@ export default {
       "src",
       "../script.js"
     );
-    plugin.async = true;
+    plugin.async = false;
     document.head.appendChild(plugin);
   }
 };
@@ -343,5 +358,9 @@ input:focus {
   .card .img-wrapper {
     height: 17em;
   }
+}
+
+.product-size {
+  white-space: pre-line;
 }
 </style>

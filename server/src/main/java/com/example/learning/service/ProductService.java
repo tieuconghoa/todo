@@ -2,7 +2,6 @@ package com.example.learning.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.example.learning.entity.Category;
 import com.example.learning.entity.ImageProduct;
 import com.example.learning.entity.Product;
+import com.example.learning.entity.ProductDescription;
+import com.example.learning.entity.ProductSize;
 import com.example.learning.entity.ReviewProduct;
 import com.example.learning.model.ProductDetailResponse;
 import com.example.learning.model.ProductRequest;
@@ -21,7 +22,9 @@ import com.example.learning.model.ProductResponse;
 import com.example.learning.model.ProductResponse.ProductDataDTO;
 import com.example.learning.repository.CategoryRepository;
 import com.example.learning.repository.ImageProductRepository;
+import com.example.learning.repository.ProductDescriptionRepository;
 import com.example.learning.repository.ProductRepository;
+import com.example.learning.repository.ProductSizeRepository;
 import com.example.learning.repository.ReviewProductRepository;
 
 @Service
@@ -38,6 +41,12 @@ public class ProductService {
     
     @Autowired
     private ImageProductRepository imgRepository;
+
+    @Autowired
+    private ProductDescriptionRepository descriptionRepository;
+
+    @Autowired
+    private ProductSizeRepository sizeRepository;
 
     /**
      * 
@@ -100,8 +109,11 @@ public class ProductService {
         Product product = productRepository.findById(productId).get();
         List<ImageProduct> imgProduct = imgRepository.findByProductId(productId);
         List<Category> category = categoryRepository.findAll();
+        ProductDescription productDescription = descriptionRepository.findByProductId(productId).get();
+        List<ProductSize> productSizeList = sizeRepository.findByProductId(productId);
         BeanUtils.copyProperties(product, productResp);
-        
+        productResp.setProductDescription(productDescription);
+        productResp.setProductSize(productSizeList);
         List<String> listImg = new ArrayList<String>();
         
         for(ImageProduct img : imgProduct) {

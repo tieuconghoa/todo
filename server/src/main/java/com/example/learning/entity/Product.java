@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class Product {
     @Column
     public int category;
 
+    @JsonProperty("image_url")
     @Column(name = "image_url")
     public String imageUrl;
 
@@ -48,6 +51,7 @@ public class Product {
     @Column
     public int quantity;
 
+    @JsonProperty("create_date")
     @Column(name = "create_date")
     public LocalDateTime createDate;
 }

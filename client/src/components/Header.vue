@@ -140,7 +140,7 @@
                   </div>
                 </div>
                 <div class="picture-product col-3">
-                  <img height="50px" :src="product.imageUrl" alt="" />
+                  <img height="50px" :src="product.image_url" alt="" />
                 </div>
               </div>
             </div>
@@ -164,7 +164,7 @@
             <div class="cart-list">
               <div class="item-search row" v-for="product in this.productCart" :key="product.id">
                 <div class="picture-product col-3">
-                  <img height="80px" :src="product.imageUrl" alt="" />
+                  <img height="80px" :src="product.image_url" alt="" />
                 </div>
                 <div class="text-left col-9">
                   <div class="name-product text-uppercase font-weight-bold">
@@ -430,7 +430,7 @@ export default {
 
 .count-holder {
   position: absolute;
-  top: 8px;
+  top: 9.5px;
   left: 0;
   right: 0;
   font-size: 14px;
