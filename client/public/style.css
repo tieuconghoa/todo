@@ -17,6 +17,11 @@ a:hover {
     font-size: 12px;
     font-weight: bold;
 }
+
 .h25 {
     height: 25px;
+}
+
+.justify-content-space-between {
+    justify-content: space-between;
 }

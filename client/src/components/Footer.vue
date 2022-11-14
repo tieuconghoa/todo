@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row pb-2">
+            <div class="row pb-2 footer-end">
                 <div class="copy-right col-6 text-left font-weight-blold">© Shoping.com. All Right Reserved</div>
                 <div class="policy col-6 d-flex justify-content-space-between">
                     <div>Terms of Service</div>
@@ -42,16 +42,64 @@
                 </div>
             </div>
         </footer>
+        <div class="sine-wave">
+            <svg class="svg-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+                    </path>
+                </defs>
+                <g class="svg-waves__parallax">
+                    <use xlink:href="#gentle-wave" x="24" y="0"></use>
+                </g>
+            </svg>
+        </div>
     </div>
 </template>
 <style>
 .footer {
     width: 100%;
     background-color: #1c3b35;
-    color: #fff;
+    color: #000;
+    position: relative;
+    background: linear-gradient(72.12deg,
+            #fbdbe3 0%,
+            #f5c7e1 34.72%,
+            #d0dee8 75.75%,
+            #60e4e2 100%);
 }
-.subcribe input{
+
+
+.subcribe input {
     border-radius: 25px;
     padding: 0 20px;
+}
+
+/* Sine Wave Animation Effect */
+
+.svg-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 180px;
+}
+.footer-end {
+    z-index: 100;
+}
+
+@media (max-width: 767px) {
+    .svg-waves {
+        height: 80px;
+    }
+}
+
+.svg-waves__parallax>use:nth-child(1) {
+    -webkit-animation-delay: -2s;
+    animation-delay: -2s;
+    -webkit-animation-duration: 7s;
+    animation-duration: 7s;
+    fill: rgba(255, 255, 255, 0.7);
 }
 </style>
