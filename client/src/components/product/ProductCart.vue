@@ -6,11 +6,7 @@
     </div>
 
     <div class="product-cart-list container">
-      <div
-        class="product-cart-item"
-        v-for="cart in productCarts"
-        :key="cart.product_id"
-      >
+      <div class="product-cart-item" v-for="cart in productCarts" :key="cart.product_id + cart.size">
         <div class="product-info d-flex">
           <div>
             <img class="small-img mr-3" :src="cart.image_url" alt="" />
@@ -20,32 +16,21 @@
             <div class="product-price">{{ fomatCurrency(cart.price) }}</div>
             <div class="product-size">{{ cart.size }}</div>
             <div class="product-quantity">
-              <div class="d-flex w-50">
-                <button
-                  class="h25 btn-subtract"
-                  @click="
-                    () => {
-                      cart.count--;
-                    }
-                  "
-                >
+              <div class="d-flex">
+                <button class="h25 btn-subtract" :disabled="cart.count < 1" @click="
+                  () => {
+                    cart.count--;
+                  }
+                ">
                   -
                 </button>
-                <input
-                  type="text"
-                  class="w-50 h25 text-center cart-amount"
-                  name=""
-                  id=""
-                  v-model="cart.count"
-                />
-                <button
-                  class="h25 btn-add"
-                  @click="
-                    () => {
-                      cart.count++;
-                    }
-                  "
-                >
+                <input type="text" class="w-xd-50 w-sm-75 h25 text-center cart-amount" name="" id=""
+                  v-model="cart.count" />
+                <button class="h25 btn-add" @click="
+                  () => {
+                    cart.count++;
+                  }
+                ">
                   +
                 </button>
               </div>
@@ -53,10 +38,7 @@
           </div>
         </div>
         <div class="total-amount">
-          <div
-            class="btn-delete"
-            @click="deleteShoppingCart(cart.product_id, cart.size)"
-          >
+          <div class="btn-delete" @click="deleteShoppingCart(cart.product_id, cart.size)">
             ×
           </div>
           <div class="price mt-5">
@@ -64,10 +46,10 @@
           </div>
         </div>
       </div>
-      <div class="mt-5 d-flex justify-content-space-between">
+      <div v-if="productCarts.length > 0" class="mt-5 d-flex justify-content-space-between">
         <div>Tổng: </div>
         <div class="text-right font-weight-bold text-danger">{{
-          fomatCurrency(this.caculateTotal())
+            fomatCurrency(this.caculateTotal())
         }}</div>
       </div>
     </div>
@@ -105,18 +87,22 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
 .small-img {
   height: 150px;
   max-width: auto;
 }
+
 .product-cart-item {
   padding: 20px 0 20px 0;
   border-bottom: 1px solid #ededed;
 }
+
 .product-info {
   padding-left: 20px;
   text-align: left;
 }
+
 .cart-amount {
   background: #ededed;
   border: 1px solid #dadbdd;
@@ -125,6 +111,7 @@ export default {
   font-weight: 500;
   font-size: 15px;
 }
+
 .btn-subtract,
 .btn-add {
   width: 25px;
@@ -134,15 +121,30 @@ export default {
   border: 1px solid #dadbdd;
   outline: none;
 }
+
 .total-amount {
   text-align: right;
 }
+
 .btn-delete {
   font-size: 30px;
   cursor: pointer;
   outline: none;
 }
+
 .justify-content-space-between {
-    justify-content: space-between;
+  justify-content: space-between;
+}
+
+@media(min-width: 768px ) {
+  .w-xd-50 {
+    width: 50%;
+  }
+}
+
+@media (min-width: 320px)  and (max-width: 768px ){
+  .w-sm-75 {
+    width: 75%;
+  }
 }
 </style>

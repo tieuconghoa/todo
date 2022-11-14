@@ -78,15 +78,6 @@
                     <a class="nav-link" href="#">Sản phẩm</a>
                   </li>
                 </router-link>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Chủ đề 2</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Chủ đề 3</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Chủ đề 4</a>
-                </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
