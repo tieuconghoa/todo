@@ -55,7 +55,7 @@ export const product = {
           product.state.productCart[i].product_id == shoppingCart.product_id &&
           product.state.productCart[i].size == shoppingCart.size
         ) {
-          product.state.productCart[i].count += shoppingCart.count;
+          product.state.productCart[i].count += parseInt(shoppingCart.count);
           duplicate = true;
           break;
         }

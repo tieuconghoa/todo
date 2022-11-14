@@ -6,6 +6,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import Todo from "@/components/todo/Todo.vue";
 import ProductList from "@/components/product/ProductList.vue";
 import ProductDetail from "@/components/product/ProductDetail.vue";
+import ProductCart from "@/components/product/ProductCart.vue";
 
 import { store } from "../store";
 
@@ -45,6 +46,11 @@ const routes = [
     path: "/product/:name",
     name: "Detail",
     component: ProductDetail,
+  },
+  {
+    path: "/cart",
+    name: "ProductCart",
+    component: ProductCart,
   },
 ];
 const router = new VueRouter({

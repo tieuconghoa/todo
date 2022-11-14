@@ -13,7 +13,6 @@ $(window).ready(function () {
     let elementWidth = carouselScreen - cardWidth * 4 + 16;
     var scrollPosition = 0;
     $("#carouselExampleControls .carousel-control-next").on("click", function () {
-      console.log("next", scrollPosition, carouselWidth, cardWidth);
       if (scrollPosition < (carouselWidth - elementWidth) - cardWidth * 4) {
         scrollPosition += cardWidth;
         $("#carouselExampleControls .carousel-inner").animate(
@@ -23,7 +22,6 @@ $(window).ready(function () {
       }
     });
     $("#carouselExampleControls .carousel-control-prev").on("click", function () {
-      console.log("prev", scrollPosition, cardWidth);
       if (scrollPosition > 0) {
         scrollPosition -= cardWidth;
         $("#carouselExampleControls .carousel-inner").animate(

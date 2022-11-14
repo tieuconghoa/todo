@@ -59,7 +59,7 @@
                 </g>
               </svg>
               <span class="count-holder"><span class="count">{{
-                  this.productCart == null ? 0 : this.productCart.length
+                 caculateProductQuantity(this.productCart)
               }}</span></span>
             </span>
           </div>
@@ -201,7 +201,7 @@
               </div>
               <div class="payment mt-4" v-if="productCart.length > 0">
                 <button class="btn btn-danger">Thanh Toán</button>
-                <button class="btn btn-danger ml-3">Xem Giỏ Hàng</button>
+                <button class="btn btn-danger ml-3" @click="viewCart">Xem Giỏ Hàng</button>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@ export default {
       store.dispatch("product/getProductByName", data);
     },
     viewDetail(product_id) {
-      // $(".close").click();
+      $(".close").click();
       this.$router.push({
         path: `/product/${product_id}`
       }).catch((err)=>{console.log(err)});
@@ -261,6 +261,12 @@ export default {
           product_size: product_size,
         })
       ))
+    },
+    viewCart() {
+       $(".close").click();
+      this.$router.push({
+        path: "/cart"
+      }).catch((err)=>{console.log(err)});
     }
   },
   created() {
@@ -430,7 +436,7 @@ export default {
 
 .count-holder {
   position: absolute;
-  top: 9.5px;
+  top: 9px;
   left: 0;
   right: 0;
   font-size: 14px;

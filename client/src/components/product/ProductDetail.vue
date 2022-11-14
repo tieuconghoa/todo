@@ -3,13 +3,27 @@
     <div class="row mx-0">
       <div class="col-md-6 col-xs-12 d-flex">
         <div class="small-img-row col-3">
-          <div class="small-img-col" v-for="img in product.image_url_list" :key="img.id">
-            <img :src="img" alt="" width="100%" class="small-img" @click="changeImg" />
+          <div
+            class="small-img-col"
+            v-for="img in product.image_url_list"
+            :key="img.id"
+          >
+            <img
+              :src="img"
+              alt=""
+              width="100%"
+              class="small-img"
+              @click="changeImg"
+            />
           </div>
         </div>
         <div class="col-9">
-          <vue-image-zoomer :regular="urlZoom == '' ? product.image_url : urlZoom"
-            :zoom="urlZoom == '' ? product.image_url : urlZoom" :zoom-amount="3" img-class="img-fluid">
+          <vue-image-zoomer
+            :regular="urlZoom == '' ? product.image_url : urlZoom"
+            :zoom="urlZoom == '' ? product.image_url : urlZoom"
+            :zoom-amount="3"
+            img-class="img-fluid"
+          >
           </vue-image-zoomer>
         </div>
       </div>
@@ -17,39 +31,67 @@
         <h1 class="text-left">{{ product.name }}</h1>
         <div class="h4 text-left">
           <span class="text-danger font-weight-bold">{{
-              fomatCurrency(product.discount)
+            fomatCurrency(product.discount)
           }}</span>
-          <span class="btn ml-1 font-weight-light" v-if="product.price != product.discount"><del>{{
-              fomatCurrency(product.price)
-          }}</del></span>
+          <span
+            class="btn ml-1 font-weight-light"
+            v-if="product.price != product.discount"
+            ><del>{{ fomatCurrency(product.price) }}</del></span
+          >
         </div>
         <div class="form-inline">
           <div class="form-check form-check-inline form-choose-size">
-            <div v-for="size in product.product_size_list" :key="size.id" :class="'size size-' + size">
-              <input type="radio" :id="'swatch-' + size" name="size" value="S" />
-              <label class="form-check-label" :class="size == product.product_size_list[0] ? 'sb' : ''"
-                @click="changeSize" :for="'swatch-' + size">{{ size.product_size }}</label>
+            <div
+              v-for="size in product.product_size_list"
+              :key="size.id"
+              :class="'size size-' + size"
+            >
+              <input
+                type="radio"
+                :id="'swatch-' + size"
+                name="size"
+                value="S"
+              />
+              <label
+                class="form-check-label"
+                :class="size == product.product_size_list[0] ? 'sb' : ''"
+                @click="changeSize"
+                :for="'swatch-' + size"
+                >{{ size.product_size }}</label
+              >
             </div>
           </div>
         </div>
         <div class="form-inline">
           <div class="input-group">
             <div class="input-group-prepend">
-              <button class="btn btn-outline input-group-text" :disabled="count <= 1" @click="
-                () => {
-                  count--;
-                }
-              ">
+              <button
+                class="btn btn-outline input-group-text"
+                :disabled="count <= 1"
+                @click="
+                  () => {
+                    count--;
+                  }
+                "
+              >
                 -
               </button>
             </div>
-            <input type="text" class="form-control count-buy" v-model="count" maxlength="8" />
+            <input
+              type="text"
+              class="form-control count-buy"
+              v-model="count"
+              maxlength="8"
+            />
             <div class="input-group-prepend">
-              <button class="btn btn-outline input-group-text" @click="
-                () => {
-                  count++;
-                }
-              ">
+              <button
+                class="btn btn-outline input-group-text"
+                @click="
+                  () => {
+                    count++;
+                  }
+                "
+              >
                 +
               </button>
             </div>
@@ -63,67 +105,100 @@
         <table class="table table-responsive">
           <tr class="text-left">
             <td>Miêu tả</td>
-            <td>{{ product.product_description.product_description }}</td>
+            <td>{{ product.product_description?.product_description }}</td>
           </tr>
           <tr class="text-left">
             <td>Chất liệu</td>
-            <td>{{ product.product_description.product_material }}</td>
+            <td>{{ product.product_description?.product_material }}</td>
           </tr>
           <tr class="text-left product-size">
             <td>Kích thước</td>
-            <td>{{ product.product_description.product_size }}</td>
+            <td>{{ product.product_description?.product_size }}</td>
           </tr>
           <tr class="text-left">
             <td>Kích thước của mẫu</td>
-            <td>{{ product.product_description.product_model_size }}</td>
+            <td>{{ product.product_description?.product_model_size }}</td>
           </tr>
           <tr class="text-left">
             <td>Phụ kiện đi kèm</td>
-            <td><span v-if="product.product_description.product_accessory">{{ (products.filter(item => {
-                return item.id
-                  == product.product_description.product_accessory
-              }))[0].name
-            }}</span></td>
+            <td>
+              <span v-if="product.product_description?.product_accessory">{{
+                products.filter((item) => {
+                  return (
+                    item.id == product.product_description?.product_accessory
+                  );
+                })[0].name
+              }}</span>
+            </td>
           </tr>
         </table>
       </div>
     </div>
     <div>
-      <div class="h3 mt-5 relate-product"><span>CÁC SẢN PHẨM TƯƠNG TỰ</span></div>
+      <div class="h3 mt-5 relate-product">
+        <span>CÁC SẢN PHẨM TƯƠNG TỰ</span>
+      </div>
       <div class="text-center my-3 mt-5">
-        <div v-if="relateProducts" id="carouselExampleControls" class="carousel" data-bs-ride="carousel">
+        <div
+          v-if="relateProducts"
+          id="carouselExampleControls"
+          class="carousel"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-inner">
-            <div class="carousel-item" :class="item.id == relateProducts[0].id ? 'active' : ''"
-              v-for="item in relateProducts" :key="item.id">
+            <div
+              class="carousel-item"
+              :class="item.id == relateProducts[0].id ? 'active' : ''"
+              v-for="item in relateProducts"
+              :key="item.id"
+            >
               <div class="px-2">
-                <div class="img-fluid product-item" @click="viewDetail(item.id)"><img :src="item.image_url"
-                    class="d-block w-100" alt="..."> </div>
-                <div class="sale-off" v-if="caculateSaleOff(item.price, item.discount) > 0">{{
-                    caculateSaleOff(item.price, item.discount)
-                }}%</div>
-                <div class="product-name mt-2 font-weight-bold">{{ item.name }}</div>
+                <div
+                  class="img-fluid product-item"
+                  @click="viewDetail(item.id)"
+                >
+                  <img :src="item.image_url" class="d-block w-100" alt="..." />
+                </div>
+                <div
+                  class="sale-off"
+                  v-if="caculateSaleOff(item.price, item.discount) > 0"
+                >
+                  {{ caculateSaleOff(item.price, item.discount) }}%
+                </div>
+                <div class="product-name mt-2 font-weight-bold">
+                  {{ item.name }}
+                </div>
                 <div>
                   <span class="text-danger font-weight-bold">{{
-                      fomatCurrency(item.discount)
+                    fomatCurrency(item.discount)
                   }}</span>
-                  <span class="ml-1 font-weight-light btn-sm" v-if="item.price != item.discount"><del>{{
-                      fomatCurrency(item.price)
-                  }}</del></span>
+                  <span
+                    class="ml-1 font-weight-light btn-sm"
+                    v-if="item.price != item.discount"
+                    ><del>{{ fomatCurrency(item.price) }}</del></span
+                  >
                 </div>
               </div>
             </div>
           </div>
-          <a class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <a
+            class="carousel-control-prev"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev"
+          >
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <a
+            class="carousel-control-next"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="next"
+          >
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -141,14 +216,19 @@ export default {
   },
   components: {
     vueImageZoomer,
-    ProductItem
+    ProductItem,
   },
   computed: {
     products: function () {
       return store.state.product?.products || [];
     },
     relateProducts: function () {
-      return store.state.product.products?.filter(item => { return item.category == store.state.product.productDetail?.category && item.id != store.state.product?.productDetail.id });
+      return store.state.product.products?.filter((item) => {
+        return (
+          item.category == store.state.product.productDetail?.category &&
+          item.id != store.state.product?.productDetail.id
+        );
+      });
     },
     product: function () {
       return store.state.product.productDetail || {};
@@ -157,19 +237,15 @@ export default {
   methods: {
     addToCart() {
       let size = $(".sb").text();
-      store.dispatch("product/addItemShoppingCart", (
-        JSON.parse(
-          JSON.stringify({
-            product_id: this.$route.params.name,
-            price: this.product.price,
-            name: this.product.name,
-            discount: this.product.discount,
-            image_url: this.product.image_url,
-            size: size,
-            count: this.count,
-          })
-        )
-      ));
+      store.dispatch("product/addItemShoppingCart", {
+        product_id: this.$route.params.name,
+        price: this.product.price,
+        name: this.product.name,
+        discount: this.product.discount,
+        image_url: this.product.image_url,
+        size: size,
+        count: parseInt(this.count),
+      });
     },
     changeImg(event) {
       $(".small-img").removeClass("active");
@@ -187,15 +263,12 @@ export default {
   created() {
     store.dispatch("product/getProductDetail", this.$route.params.name);
   },
-  updated : function() {
+  updated: function () {
     const plugin = document.createElement("script");
-    plugin.setAttribute(
-      "src",
-      "../script.js"
-    );
+    plugin.setAttribute("src", "../script.js");
     plugin.async = false;
     document.head.appendChild(plugin);
-  }
+  },
 };
 </script>
 <style>
@@ -303,7 +376,7 @@ input:focus {
 }
 
 .product-relation .sale-off {
-  left: 110px
+  left: 110px;
 }
 
 .carousel-inner {
