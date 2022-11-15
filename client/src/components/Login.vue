@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import { store } from "../store";
+import store from "../store";
 import { loginService } from "../service/LoginService";
 export default {
   data: () => {

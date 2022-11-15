@@ -58,9 +58,11 @@
                   <path d="M12,2c3,0,3,2.3,3,4h2c0-2.8-1-6-5-6S7,3.2,7,6h2C9,4.3,9,2,12,2z"></path>
                 </g>
               </svg>
-              <span class="count-holder"><span class="count">{{
-                 caculateProductQuantity(this.productCart)
-              }}</span></span>
+              <span class="count-holder">
+                <span class="count">{{
+                    caculateProductQuantity(this.productCart)
+                }}</span>
+              </span>
             </span>
           </div>
         </div>
@@ -78,7 +80,7 @@
                     <a class="nav-link" href="#">Sản phẩm</a>
                   </li>
                 </router-link>
-                 <router-link class="link" to="/admin">
+                <router-link class="link" to="/admin">
                   <li class="nav-item">
                     <a class="nav-link" href="#">Dashboard</a>
                   </li>
@@ -136,7 +138,7 @@
                   </div>
                 </div>
                 <div class="picture-product col-3">
-                  <img height="50px" :src="product.image_url" alt="" />
+                  <img :src="product.image_url" alt="aaa" />
                 </div>
               </div>
             </div>
@@ -158,7 +160,7 @@
 
           <div class="modal-body">
             <div class="cart-list">
-              <div class="item-search row" v-for="product in this.productCart" :key="product.id">
+              <div class="item-search row" v-for="product in this.productCart" :key="product.product_id">
                 <div class="picture-product col-3">
                   <img height="80px" :src="product.image_url" alt="" />
                 </div>
@@ -209,7 +211,8 @@
   </div>
 </template>
 <script>
-import { store } from "@/store";
+import store from "@/store";
+import { commons } from "@/commons";
 export default {
   data: () => {
     return {
@@ -223,7 +226,7 @@ export default {
       return store.state.product.productSearch;
     },
     productCart() {
-      return store.state.product.productCart;
+      return store.state.product.productCart
     },
   },
   methods: {
@@ -235,7 +238,7 @@ export default {
       $(".close").click();
       this.$router.push({
         path: `/product/${product_id}`
-      }).catch((err)=>{console.log(err)});
+      }).catch((err) => { console.log(err) });
     },
     clearSearch() {
       this.name = null;
@@ -259,10 +262,19 @@ export default {
       ))
     },
     viewCart() {
-       $(".close").click();
+      $(".close").click();
       this.$router.push({
         path: "/cart"
-      }).catch((err)=>{console.log(err)});
+      }).catch((err) => { console.log(err) });
+    },
+    caculateSaleOff(price, discount) {
+      return commons.caculateSaleOff(price, discount);
+    },
+    fomatCurrency(number) {
+      return commons.fomatCurrency(number);
+    },
+    caculateProductQuantity(product_cart) {
+      return commons.caculateProductQuantity(product_cart);
     }
   },
   created() {
@@ -274,7 +286,7 @@ export default {
       }
     };
   },
-  
+
 };
 </script>
 

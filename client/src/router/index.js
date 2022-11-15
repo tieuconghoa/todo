@@ -1,16 +1,13 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import {createRouter, createWebHistory } from "vue-router";
 import Login from "@/components/Login.vue";
-import Welcome from "@/components/Welcome.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Todo from "@/components/todo/Todo.vue";
 import ProductList from "@/components/product/ProductList.vue";
 import ProductDetail from "@/components/product/ProductDetail.vue";
 import ProductCart from "@/components/product/ProductCart.vue";
 import Dashboard from "@/components/admin/Dashboard.vue";
-import { store } from "../store";
+import store from "../store";
 
-Vue.use(VueRouter);
 const routes = [
   // {
   //   path: "/",
@@ -58,8 +55,8 @@ const routes = [
     component: Dashboard,
   },
 ];
-const router = new VueRouter({
-  mode: "history",
+const router = createRouter({
+  history: createWebHistory(),
   base: process.env.BASE_URL,
   routes,
 });

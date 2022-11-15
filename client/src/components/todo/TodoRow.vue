@@ -1,5 +1,5 @@
 <script>
-import { store } from "@/store";
+import store from "@/store";
 export default {
   props: ["todo_prop", "date_prop"],
   computed: {

@@ -8,9 +8,10 @@
           </div>
         </div>
         <div class="col-9">
-          <vue-image-zoomer :regular="urlZoom == '' ? product.image_url : urlZoom"
-            :zoom="urlZoom == '' ? product.image_url : urlZoom" :zoom-amount="3" img-class="img-fluid">
-          </vue-image-zoomer>
+          <!-- <vue-image-zoomer :regular="urlZoom == '' ? product?.image_url : urlZoom"
+            :zoom="urlZoom == '' ? product?.image_url : urlZoom" :zoom-amount="3" img-class="img-fluid">
+          </vue-image-zoomer> -->
+          <img :src="urlZoom == '' ? product?.image_url : urlZoom" class="img-fluid" alt="">
         </div>
       </div>
       <div class="col-md-6 col-xs-12">
@@ -54,7 +55,7 @@
               </button>
             </div>
           </div>
-          <button class="blob-btn col-4 btn-card"  @click="addToCart">
+          <button class="blob-btn col-4 btn-card" @click="addToCart">
             Thêm vào giỏ
             <span class="blob-btn__inner">
               <span class="blob-btn__blobs">
@@ -71,30 +72,24 @@
         <table class="table table-responsive">
           <tr class="text-left">
             <td>Miêu tả</td>
-            <td>{{ product.product_description.product_description }}</td>
+            <td>{{ product.product_description?.product_description }}</td>
           </tr>
           <tr class="text-left">
             <td>Chất liệu</td>
-            <td>{{ product.product_description.product_material }}</td>
+            <td>{{ product.product_description?.product_material }}</td>
           </tr>
           <tr class="text-left product-size">
             <td>Kích thước</td>
-            <td>{{ product.product_description.product_size }}</td>
+            <td>{{ product.product_description?.product_size }}</td>
           </tr>
           <tr class="text-left">
             <td>Kích thước của mẫu</td>
-            <td>{{ product.product_description.product_model_size }}</td>
+            <td>{{ product.product_description?.product_model_size }}</td>
           </tr>
           <tr class="text-left">
             <td>Phụ kiện đi kèm</td>
             <td>
-              <span v-if="product.product_description.product_accessory">{{
-                  products.filter((item) => {
-                    return (
-                      item.id == product.product_description.product_accessory
-                    );
-                  })[0].name
-              }}</span>
+              <span v-if="product.product_description?.product_accessory"></span>
             </td>
           </tr>
         </table>
@@ -144,10 +139,10 @@
   </div>
 </template>
 <script>
-import { store } from "@/store";
-import vueImageZoomer from "vue-image-zoomer";
+import store from "@/store";
+// import vueImageZoomer from "vue-image-zoomer";
 import ProductItem from "./ProductItem.vue";
-import { caculateSaleOff, fomatCurrency } from "@/commons";
+import { commons } from "@/commons";
 export default {
   data: () => {
     return {
@@ -156,12 +151,11 @@ export default {
     };
   },
   components: {
-    vueImageZoomer,
     ProductItem,
   },
   computed: {
     products: function () {
-      return store.state.product?.products || [];
+      return store.state.product.products || [];
     },
     relateProducts: function () {
       return store.state.product.products?.filter((item) => {
@@ -200,6 +194,15 @@ export default {
     viewDetail(product_id) {
       this.$router.push(`/product/${product_id}`);
     },
+    caculateSaleOff(price, discount) {
+      return commons.caculateSaleOff(price, discount);
+    },
+    fomatCurrency(number) {
+      return commons.fomatCurrency(number);
+    },
+    caculateProductQuantity(product_cart) {
+      return commons.caculateProductQuantity(product_cart);
+    }
   },
   created() {
     store.dispatch("product/getProductDetail", this.$route.params.name);
@@ -254,6 +257,7 @@ input:focus {
   outline: none;
   box-shadow: none;
 }
+
 button:focus {
   outline: none;
 }
@@ -481,5 +485,4 @@ button:focus {
 .blob-btn:hover .blob-btn__blob {
   transform: translateZ(0) scale(1.7);
 }
-
 </style>

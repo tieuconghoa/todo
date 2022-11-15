@@ -1,16 +1,15 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from 'vuex'
 
 import { authentication } from "./authentication.module";
 import { todo } from "./todo.module";
 import { product } from "./product.module";
 
-Vue.use(Vuex);
-
-export const store = new Vuex.Store({
+const store = createStore({
   modules: {
     authentication,
     todo,
     product
   },
 });
+
+export default store;

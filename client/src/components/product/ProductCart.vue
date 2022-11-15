@@ -56,8 +56,8 @@
   </div>
 </template>
 <script>
-import { store } from "@/store";
-import { fomatCurrency, caculateProductQuantity } from "@/commons";
+import store from "@/store";
+import { commons } from "@/commons";
 export default {
   computed: {
     productCarts: function () {
@@ -79,6 +79,15 @@ export default {
       }
       return sum;
     },
+    caculateSaleOff(price, discount) {
+      return commons.caculateSaleOff(price, discount);
+    },
+    fomatCurrency(number) {
+      return commons.fomatCurrency(number);
+    },
+    caculateProductQuantity(product_cart) {
+      return commons.caculateProductQuantity(product_cart);
+    }
   },
 };
 </script>

@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import { store } from "@/store";
+import store from "@/store";
 import TodoRow from "./TodoRow.vue";
 export default {
   data: function () {

@@ -1,7 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import { productService } from "../service/ProductService";
-Vue.use(Vuex);
 
 export const product = {
   namespaced: true,
@@ -24,6 +21,9 @@ export const product = {
     addShoppingCart(state, productCart) {
       state.productCart.push(productCart);
     },
+    setShoppingCart(state, productCart) {
+      state.productCart = productCart;
+    }
   },
   actions: {
     getAllProduct({ commit }) {
@@ -42,11 +42,13 @@ export const product = {
       });
     },
     deleteItemShoppingCart({commit}, shoppingCart) {
+      var productCart;
       for (let i = 0; i < product.state.productCart.length; i++) {
-          product.state.productCart = product.state.productCart.filter((item) => {
+          productCart = product.state.productCart.filter((item) => {
               return !(item.product_id == shoppingCart.product_id && item.size == shoppingCart.product_size)
           })
       }
+      commit("setShoppingCart", productCart);
     },
     addItemShoppingCart({ commit }, shoppingCart) {
       let duplicate = false;
@@ -63,6 +65,8 @@ export const product = {
 
       if (product.state.productCart.length == 0 || !duplicate) {
         commit("addShoppingCart", shoppingCart);
+      } else {
+        commit("setShoppingCart", product.state.productCart);
       }
     },
   },

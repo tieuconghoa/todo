@@ -1,4 +1,4 @@
-import { store } from "@/store";
+import store from "@/store";
 import { constants }  from '@/constants'
 export const todoService = {
     getAll,

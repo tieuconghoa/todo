@@ -1,7 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import { todoService } from "../service/TodoService";
-Vue.use(Vuex);
 
 export const todo = {
   namespaced: true,

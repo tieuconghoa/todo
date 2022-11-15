@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import { store } from "@/store";
+import store from "@/store";
 import ProductItem from "./ProductItem.vue";
 export default {
   components: { ProductItem },

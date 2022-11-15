@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { caculateSaleOff, fomatCurrency } from "@/commons";
+import { commons } from "@/commons";
 export default {
   props: ["product_prop"],
   computed: {
@@ -28,6 +28,15 @@ export default {
     viewDetail() {
       this.$router.push(`/product/${this.product_prop.id}`);
     },
+    caculateSaleOff(price, discount) {
+      return commons.caculateSaleOff(price, discount);
+    },
+    fomatCurrency(number) {
+      return commons.fomatCurrency(number);
+    },
+    caculateProductQuantity(product_cart) {
+      return commons.caculateProductQuantity(product_cart);
+    }
   }
 };
 </script>
