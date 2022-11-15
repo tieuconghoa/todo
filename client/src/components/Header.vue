@@ -78,6 +78,11 @@
                     <a class="nav-link" href="#">Sản phẩm</a>
                   </li>
                 </router-link>
+                 <router-link class="link" to="/admin">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                  </li>
+                </router-link>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">

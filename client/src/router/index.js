@@ -7,7 +7,7 @@ import Todo from "@/components/todo/Todo.vue";
 import ProductList from "@/components/product/ProductList.vue";
 import ProductDetail from "@/components/product/ProductDetail.vue";
 import ProductCart from "@/components/product/ProductCart.vue";
-
+import Dashboard from "@/components/admin/Dashboard.vue";
 import { store } from "../store";
 
 Vue.use(VueRouter);
@@ -51,6 +51,11 @@ const routes = [
     path: "/cart",
     name: "ProductCart",
     component: ProductCart,
+  },
+  {
+    path: "/admin",
+    name: "Dashboard",
+    component: Dashboard,
   },
 ];
 const router = new VueRouter({

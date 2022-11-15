@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div v-if="productCarts.length > 0" class="mt-5 d-flex justify-content-space-between">
+      <div v-if="productCarts.length > 0" class="my-5 d-flex justify-content-space-between">
         <div>Tổng: </div>
         <div class="text-right font-weight-bold text-danger">{{
             fomatCurrency(this.caculateTotal())

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Header v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login'"/>
+    <Header v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login' && !$route.fullPath.includes('admin')" />
       <router-view :key="$route.fullPath"></router-view>
-    <Footer v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login'"/>
+    <Footer v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login' && !$route.fullPath.includes('admin')"/>
   </div>
 </template>
 <script>

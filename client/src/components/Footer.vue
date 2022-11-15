@@ -60,13 +60,13 @@
 .footer {
     width: 100%;
     background-color: #1c3b35;
-    color: #000;
+    color: #fff;
     position: relative;
     background: linear-gradient(72.12deg,
-            #fbdbe3 0%,
-            #f5c7e1 34.72%,
-            #d0dee8 75.75%,
-            #60e4e2 100%);
+            #a11d3e 0%,
+            #690c41 34.72%,
+            #195179 75.75%,
+            #086e6d 100%);
 }
 
 
@@ -81,7 +81,6 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 1;
     width: 100%;
     height: 180px;
 }
@@ -100,6 +99,6 @@
     animation-delay: -2s;
     -webkit-animation-duration: 7s;
     animation-duration: 7s;
-    fill: rgba(255, 255, 255, 0.7);
+    fill: rgba(255, 255, 255, 0.2);
 }
 </style>
