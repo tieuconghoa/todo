@@ -162,7 +162,7 @@
             <div class="cart-list">
               <div class="item-search row" v-for="product in this.productCart" :key="product.product_id">
                 <div class="picture-product col-3">
-                  <img height="80px" :src="product.image_url" alt="" />
+                  <img :src="product.image_url" alt="" />
                 </div>
                 <div class="text-left col-9">
                   <div class="name-product text-uppercase font-weight-bold">
@@ -453,6 +453,10 @@ export default {
   line-height: 1;
   height: 17px;
   overflow: hidden;
+}
+.picture-product img{
+  height: 80px;
+  width: auto;
 }
 
 .quantity-product {

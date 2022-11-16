@@ -92,7 +92,7 @@
 </template>
 <script>
 export default {
-  created() {
+  mounted() {
     jQuery(function ($) {
       $(".sidebar-dropdown > a").click(function () {
         $(".sidebar-submenu").slideUp(200);
@@ -108,9 +108,11 @@ export default {
 
       $("#close-sidebar").click(function () {
         $(".page-wrapper").removeClass("toggled");
+        $(".page-content").removeClass("toggled");
       });
       $("#show-sidebar").click(function () {
         $(".page-wrapper").addClass("toggled");
+        $(".page-content").addClass("toggled");
       });
     });
   },
@@ -182,10 +184,6 @@ body {
   text-align: left;
 }
 /*----------------page-wrapper----------------*/
-
-.page-wrapper {
-  height: 100vh;
-}
 
 .page-wrapper .theme {
   width: 40px;

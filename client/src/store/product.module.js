@@ -19,10 +19,10 @@ export const product = {
       state.productDetail = product;
     },
     addShoppingCart(state, productCart) {
-      state.productCart.push(productCart);
+      state.productCart = [...state.productCart, productCart];
     },
     setShoppingCart(state, productCart) {
-      state.productCart = productCart;
+      state.productCart = [...productCart];
     }
   },
   actions: {

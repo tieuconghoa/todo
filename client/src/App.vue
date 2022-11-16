@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
     <Header v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login' && !$route.fullPath.includes('admin')" />
+    <AdminHeader v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login' && $route.fullPath.includes('admin')" />
       <router-view :key="$route.fullPath"></router-view>
     <Footer v-show="this.$route.name != 'Welcome' && this.$route.name != 'Login' && !$route.fullPath.includes('admin')"/>
-  </div>
 </template>
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import AdminHeader from "@/components/admin/AdminHeader.vue"
 export default {
-  components: { Header, Footer },
+  components: { Header, Footer, AdminHeader },
   methods : {
   }
 };
