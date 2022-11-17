@@ -8,9 +8,9 @@
           <div class="label">Total Sales</div>
           <div class="total">
             {{
-              commons.fomatCurrency(allOrder.reduce(function (a, b) {
-                return a + b.amount;
-              }, 0))
+                commons.fomatCurrency(allOrder.reduce(function (a, b) {
+                  return a + b.amount;
+                }, 0))
             }}
           </div>
         </div>
@@ -60,19 +60,23 @@
             <td>{{ commons.fomatCurrency(order.amount) }}</td>
             <td class="status">{{ order.status }}</td>
             <td>{{ order.order_date }}</td>
-            <td>
-              <span
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
+            <td class="order-action">
+              <span id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </span>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Xem</a>
-                <a class="dropdown-item" href="#">Sửa</a>
-                <a class="dropdown-item" href="#">Download</a>
+                <a class="dropdown-item" href="#">
+                  <i class="fa-solid fa-eye"></i>
+                  <span class="pl-3">Xem</span>
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fa-solid fa-pencil"></i>
+                  <span class="pl-3">Sửa</span>
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fa-solid fa-cloud-arrow-down"></i>
+                  <span class="pl-3">Download</span>
+                </a>
               </div>
             </td>
           </tr>
@@ -112,14 +116,19 @@ export default {
   padding: 20px 20px 20px 20px;
   background: rgb(247, 247, 247);
   height: 100vh;
+  transition: all 0.5s;
 }
+
 .page-content.toggled {
   padding-left: 280px;
+  transition: all 0.5s;
 }
+
 .report {
   display: flex;
   justify-content: space-between;
 }
+
 .total-sales,
 .total-orders,
 .total-products {
@@ -128,11 +137,13 @@ export default {
   display: flex;
   padding: 20px 20px;
 }
+
 .lastest-orders {
   margin-top: 50px;
   background: #fff;
   padding: 20px 20px;
 }
+
 .total-sales .icon-dola,
 .total-orders .icon-cart,
 .total-products .icon-shopping {
@@ -152,10 +163,16 @@ export default {
   padding-left: 20px;
   text-align: left;
 }
+
 .info .label {
   color: rgb(202 204 206);
 }
+
 .lastest-orders {
   padding-top: 30px;
+}
+.order-action span {
+  padding: 0 20px;
+  cursor: pointer;
 }
 </style>

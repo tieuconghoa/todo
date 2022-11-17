@@ -16,7 +16,7 @@
         <!-- sidebar-search  -->
         <div class="sidebar-menu mt-5">
           <ul>
-            <li class="sidebar">
+            <li class="sidebar-item">
               <a href="#">
                 <i class="fa fa-tachometer-alt"></i>
                 <span>Dashboard</span>
@@ -29,34 +29,34 @@
               </a>
               <div class="sidebar-submenu">
                 <ul>
-                  <li>
+                  <li class="sidebar-item">
                     <a href="#">Add product</a>
                   </li>
-                  <li>
+                  <li class="sidebar-item">
                     <a href="#">Product list</a>
                   </li>
-                  <li>
+                  <li class="sidebar-item">
                     <a href="#">Categories</a>
                   </li>
-                  <li>
+                  <li class="sidebar-item">
                     <a href="#">Brands</a>
                   </li>
                 </ul>
               </div>
             </li>
-            <li>
+            <li class="sidebar-item">
               <a href="#">
                 <i class="far fa-gem"></i>
                 <span>Orders</span>
               </a>
             </li>
-            <li>
+            <li class="sidebar-item">
               <a href="#">
                 <i class="fa fa-chart-line"></i>
                 <span>Reviews</span>
               </a>
             </li>
-            <li>
+            <li class="sidebar-item">
               <a href="#">
                 <i class="fa fa-globe"></i>
                 <span>Transactions</span>
@@ -105,7 +105,15 @@ export default {
           $(this).parent().addClass("active");
         }
       });
-
+      $(".sidebar-menu ul .sidebar-item").click(function () {
+        if ($(this).hasClass("active")) {
+            $(".sidebar-menu ul .sidebar-item").removeClass("active");
+            $(this).addClass("active");
+        } else {
+          $(".sidebar-menu ul .sidebar-item").removeClass("active");
+          $(this).addClass("active");
+        }
+      })
       $("#close-sidebar").click(function () {
         $(".page-wrapper").removeClass("toggled");
         $(".page-content").removeClass("toggled");
@@ -191,10 +199,12 @@ body {
   display: inline-block;
   border-radius: 4px;
   margin: 2px;
+
 }
 
 .page-wrapper .theme.chiller-theme {
   background: #1e2229;
+  transition: all 1s;
 }
 
 /*----------------toggeled sidebar----------------*/
@@ -220,6 +230,7 @@ body {
 }
 .page-wrapper.toggled #show-sidebar {
   left: -40px;
+  transition: all 1s;
 }
 /*----------------sidebar-wrapper----------------*/
 
@@ -408,6 +419,10 @@ body {
 .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a:after {
   transform: rotate(90deg);
   right: 17px;
+}
+
+.sidebar-menu ul .sidebar-item.active {
+  background-color: #eee;
 }
 
 /*--------------------------side-footer------------------------------*/
