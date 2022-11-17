@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql-local
+ Source Server         : goto_mysql
  Source Server Type    : MySQL
- Source Server Version : 100136
+ Source Server Version : 80021
  Source Host           : localhost:3306
  Source Schema         : training
 
  Target Server Type    : MySQL
- Target Server Version : 100136
+ Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 14/11/2022 12:53:02
+ Date: 17/11/2022 17:30:38
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,7 @@ INSERT INTO `category` VALUES (4, 'Quần');
 DROP TABLE IF EXISTS `hibernate_sequence`;
 CREATE TABLE `hibernate_sequence`  (
   `next_val` bigint NULL DEFAULT NULL
-) ENGINE = MyISAM CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = FIXED;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = FIXED;
 
 -- ----------------------------
 -- Records of hibernate_sequence
@@ -215,6 +215,89 @@ INSERT INTO `image_product` VALUES (151, 18, 'https://product.hstatic.net/200000
 INSERT INTO `image_product` VALUES (152, 18, 'https://product.hstatic.net/200000037048/product/z3672230534715_f3a3568423a382e2a4619a01b63bbc78_57e6e44730324ab39f52994a2c3420fa_master.jpg');
 
 -- ----------------------------
+-- Table structure for order_details
+-- ----------------------------
+DROP TABLE IF EXISTS `order_details`;
+CREATE TABLE `order_details`  (
+  `order_detail_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NULL DEFAULT NULL,
+  `product_id` int NULL DEFAULT NULL,
+  `order_number` int NULL DEFAULT NULL,
+  `price` decimal(10, 2) NULL DEFAULT NULL,
+  `quantity` int NULL DEFAULT NULL,
+  `size` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`order_detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_details
+-- ----------------------------
+INSERT INTO `order_details` VALUES (1, 1, 1, 1112, 249000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (2, 1, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (3, 2, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (4, 2, 4, 1113, 500000.00, 3, 'M', 'Tím');
+INSERT INTO `order_details` VALUES (5, 3, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (6, 3, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (7, 4, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (8, 4, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (9, 5, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (10, 5, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (11, 5, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (12, 5, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (13, 6, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (14, 6, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (15, 7, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (16, 7, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (17, 7, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (18, 7, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+INSERT INTO `order_details` VALUES (19, 7, 2, 1112, 200000.00, 1, 'S', 'Xanh');
+INSERT INTO `order_details` VALUES (20, 7, 3, 1113, 400000.00, 2, 'XS', 'Đỏ');
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NULL DEFAULT NULL,
+  `order_number` int NULL DEFAULT NULL,
+  `payment_id` int NULL DEFAULT NULL,
+  `order_date` datetime NULL DEFAULT NULL,
+  `ship_date` datetime NULL DEFAULT NULL,
+  `shipper_id` int NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `payment_date` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (1, 1, 1112, 1, '2022-11-17 00:00:00', NULL, 0, '1', '2022-11-16 11:22:35');
+INSERT INTO `orders` VALUES (2, 1, 1113, 1, '2022-11-03 00:00:00', '2022-11-04 00:00:00', 1, '2', '2022-11-16 11:22:35');
+INSERT INTO `orders` VALUES (3, 2, 1114, 1, '2022-11-16 00:00:00', NULL, 0, '3', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (4, 2, 1115, 1, '2022-11-11 00:00:00', NULL, 0, '4', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (5, 2, 1116, 1, '2022-11-19 00:00:00', NULL, 0, '5', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (6, 2, 1117, 1, '2022-11-17 00:00:00', NULL, 0, '6', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (7, 2, 1118, 1, '2022-11-27 00:00:00', NULL, 0, '7', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (8, 2, 1119, 1, '2022-11-03 00:00:00', NULL, 0, '8', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (9, 2, 1120, 1, '2022-11-03 00:00:00', NULL, 0, '9', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (10, 2, 1121, 1, '2022-11-04 00:00:00', NULL, 0, '1', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (11, 2, 1122, 1, '2022-11-06 00:00:00', NULL, 0, '2', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (12, 2, 1123, 1, '2022-11-05 00:00:00', NULL, 0, '3', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (13, 2, 1124, 1, '2022-11-09 00:00:00', NULL, 0, '4', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (14, 2, 1125, 1, '2022-11-08 00:00:00', NULL, 0, '5', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (15, 2, 1126, 1, '2022-11-03 00:00:00', NULL, 0, '6', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (16, 2, 1127, 1, '2022-11-04 00:00:00', NULL, 0, '7', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (17, 2, 1128, 1, '2022-11-02 01:00:00', NULL, 0, '9', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (18, 2, 1129, 1, '2022-11-05 00:00:00', NULL, 0, '9', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (19, 2, 1130, 1, '2022-11-11 00:00:00', NULL, 0, '5', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (20, 2, 1131, 1, '2022-11-19 00:00:00', NULL, 0, '6', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (21, 2, 1132, 1, '2022-11-05 00:00:00', NULL, 0, '4', '2022-11-17 14:01:36');
+INSERT INTO `orders` VALUES (22, 2, 1133, 1, '2022-11-05 00:00:00', NULL, 0, '2', '2022-11-17 14:01:36');
+
+-- ----------------------------
 -- Table structure for product
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
@@ -227,7 +310,7 @@ CREATE TABLE `product`  (
   `discount` decimal(15, 0) NULL DEFAULT NULL,
   `detail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `quantity` int NULL DEFAULT NULL,
-  `create_date` datetime(0) NULL DEFAULT NULL,
+  `create_date` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
@@ -265,7 +348,7 @@ CREATE TABLE `product_description`  (
   `product_model_size` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `product_accessory` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`product_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of product_description
@@ -298,7 +381,7 @@ CREATE TABLE `product_size`  (
   `product_id` int NOT NULL,
   `product_size` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of product_size
@@ -398,7 +481,7 @@ CREATE TABLE `review_product`  (
   `product_id` int NULL DEFAULT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `rate` int NULL DEFAULT NULL,
-  `create_date` datetime(0) NULL DEFAULT NULL,
+  `create_date` datetime NULL DEFAULT NULL,
   `create_user` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
@@ -420,9 +503,9 @@ CREATE TABLE `todo`  (
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `create_user` int NULL DEFAULT NULL,
-  `create_date` datetime(0) NULL DEFAULT NULL,
+  `create_date` datetime NULL DEFAULT NULL,
   `update_user` int NULL DEFAULT NULL,
-  `update_date` datetime(0) NULL DEFAULT NULL,
+  `update_date` datetime NULL DEFAULT NULL,
   `del_flg` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
@@ -445,16 +528,19 @@ CREATE TABLE `user`  (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `create_user` int NULL DEFAULT NULL,
-  `create_date` datetime(0) NULL DEFAULT NULL,
+  `create_date` datetime NULL DEFAULT NULL,
   `update_user` int NULL DEFAULT NULL,
-  `update_date` datetime(0) NULL DEFAULT NULL,
+  `update_date` datetime NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `phone_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', '$2a$04$/HXNK6sOG6a7a5Otyhmh7uzpJxfCYq17r1Oc5k85ghPNgbWuiuoX.', 'tieuconghoa@gmail.com', 0, '2022-10-17 11:32:48', 0, '2022-10-17 11:32:52');
-INSERT INTO `user` VALUES (2, 'tieuconghoa', '$2a$04$/HXNK6sOG6a7a5Otyhmh7uzpJxfCYq17r1Oc5k85ghPNgbWuiuoX.', 'tieuconghoa@gmail.com', 0, '2022-10-17 11:32:48', 0, '2022-10-17 11:32:52');
+INSERT INTO `user` VALUES (1, 'admin', '$2a$04$/HXNK6sOG6a7a5Otyhmh7uzpJxfCYq17r1Oc5k85ghPNgbWuiuoX.', 'tieuconghoa@gmail.com', 0, '2022-10-17 11:32:48', 0, '2022-10-17 11:32:52', 'Admin', 'ADMIN', '123456789');
+INSERT INTO `user` VALUES (2, 'tieuconghoa', '$2a$04$/HXNK6sOG6a7a5Otyhmh7uzpJxfCYq17r1Oc5k85ghPNgbWuiuoX.', 'tieuconghoa@gmail.com', 0, '2022-10-17 11:32:48', 0, '2022-10-17 11:32:52', 'Tiêu Công Hòa', 'MOD', '22222222');
 
 SET FOREIGN_KEY_CHECKS = 1;
