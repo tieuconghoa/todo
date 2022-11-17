@@ -63,8 +63,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ["/login", "/"];
-  const authRequired = !publicPages.includes(to.path) && !"Detail" == to.name;
+  const publicPages = ["/login", "/", "/product", "/cart"];
+  const authRequired = !publicPages.includes(to.path) && "Detail" !== to.name;
   const loggedIn = store.state.authentication.token;
 
   if (authRequired && !loggedIn) {

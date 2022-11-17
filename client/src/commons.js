@@ -15,7 +15,7 @@ function fomatCurrency(number) {
       style: "currency",
       currency: "VND",
     });
-    return number;
+    return number.replaceAll(".", ",");
   } else {
     return 0;
   }

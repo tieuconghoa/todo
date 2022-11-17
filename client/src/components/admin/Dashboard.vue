@@ -6,7 +6,13 @@
         <div class="icon-dola"><i class="fa-solid fa-dollar-sign"></i></div>
         <div class="info">
           <div class="label">Total Sales</div>
-          <div class="total">19.626.028</div>
+          <div class="total">
+            {{
+              commons.fomatCurrency(allOrder.reduce(function (a, b) {
+                return a + b.amount;
+              }, 0))
+            }}
+          </div>
         </div>
       </div>
       <div class="total-orders">
@@ -15,7 +21,7 @@
         </div>
         <div class="info">
           <div class="label">Total Orders</div>
-          <div class="total">3290</div>
+          <div class="total">{{ allOrder.length }}</div>
         </div>
       </div>
       <div class="total-products">
@@ -23,8 +29,8 @@
           <i class="fa-solid fa-bag-shopping"></i>
         </div>
         <div class="info">
-          <div class="label">Total Orders</div>
-          <div class="total">322</div>
+          <div class="label">Total Products</div>
+          <div class="total">{{ allProducts.length }}</div>
         </div>
       </div>
     </div>
@@ -47,58 +53,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2323</td>
-            <td>Devon Lane</td>
-            <td>123456789</td>
-            <td>788.35</td>
-            <td>Cancel</td>
-            <td>07/05/2022</td>
-            <td><i class="fa-solid fa-ellipsis-vertical"></i></td>
-          </tr>
-          <tr>
-            <td>2323</td>
-            <td>Devon Lane</td>
-            <td>123456789</td>
-            <td>788.35</td>
-            <td>Cancel</td>
-            <td>07/05/2022</td>
-            <td><i class="fa-solid fa-ellipsis-vertical"></i></td>
-          </tr>
-          <tr>
-            <td>2323</td>
-            <td>Devon Lane</td>
-            <td>123456789</td>
-            <td>788.35</td>
-            <td>Cancel</td>
-            <td>07/05/2022</td>
-            <td><i class="fa-solid fa-ellipsis-vertical"></i></td>
-          </tr>
-          <tr>
-            <td>2323</td>
-            <td>Devon Lane</td>
-            <td>123456789</td>
-            <td>788.35</td>
-            <td>Cancel</td>
-            <td>07/05/2022</td>
-            <td><i class="fa-solid fa-ellipsis-vertical"></i></td>
-          </tr>
-          <tr>
-            <td>2323</td>
-            <td>Devon Lane</td>
-            <td>123456789</td>
-            <td>788.35</td>
-            <td>Cancel</td>
-            <td>07/05/2022</td>
-            <td><i class="fa-solid fa-ellipsis-vertical"></i></td>
-          </tr>
-          <tr>
-            <td>2323</td>
-            <td>Devon Lane</td>
-            <td>123456789</td>
-            <td>788.35</td>
-            <td>Cancel</td>
-            <td>07/05/2022</td>
+          <tr v-for="order in lastestOrder" :key="order.order_number">
+            <td>{{ order.order_number }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.customer_phone_number }}</td>
+            <td>{{ commons.fomatCurrency(order.amount) }}</td>
+            <td class="status">{{ order.status }}</td>
+            <td>{{ order.order_date }}</td>
             <td>
               <span
                 id="dropdownMenuButton"
@@ -121,7 +82,28 @@
   </main>
 </template>
 <script>
-export default {};
+import store from "@/store";
+import { commons } from "@/commons";
+export default {
+  computed: {
+    lastestOrder() {
+      return store.state.order.lastestOrder;
+    },
+    allOrder() {
+      return store.state.order.allOrder;
+    },
+    allProducts() {
+      return store.state.product.products;
+    },
+    commons() {
+      return commons;
+    },
+  },
+  created() {
+    store.dispatch("order/getLastestOrder");
+    store.dispatch("order/getAllOrder");
+  },
+};
 </script>
 <style scoped>
 .page-content {

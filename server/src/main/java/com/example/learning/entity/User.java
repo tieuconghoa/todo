@@ -36,6 +36,13 @@ public class User {
 
     @Column(name = "update_date")
     private LocalDateTime updateDate;
+    
+    private String name;
+    
+    private String role;
+    
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     /**
      * @return the id

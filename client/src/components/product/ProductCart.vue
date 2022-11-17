@@ -2,7 +2,7 @@
   <div>
     <div class="h3">Giỏ hàng của bạn</div>
     <div class="h5">
-      Có {{ caculateProductQuantity(productCarts) }} sản phẩm trong giỏ hàng
+      Có {{ commons.caculateProductQuantity(productCarts) }} sản phẩm trong giỏ hàng
     </div>
 
     <div class="product-cart-list container">
@@ -13,7 +13,7 @@
           </div>
           <div>
             <div class="product-name">{{ cart.name }}</div>
-            <div class="product-price">{{ fomatCurrency(cart.price) }}</div>
+            <div class="product-price">{{ commons.fomatCurrency(cart.price) }}</div>
             <div class="product-size">{{ cart.size }}</div>
             <div class="product-quantity">
               <div class="d-flex">
@@ -42,14 +42,14 @@
             ×
           </div>
           <div class="price mt-5">
-            {{ fomatCurrency(cart.count * cart.price) }}
+            {{ commons.fomatCurrency(cart.count * cart.price) }}
           </div>
         </div>
       </div>
       <div v-if="productCarts.length > 0" class="my-5 d-flex justify-content-space-between">
         <div>Tổng: </div>
         <div class="text-right font-weight-bold text-danger">{{
-            fomatCurrency(this.caculateTotal())
+            commons.fomatCurrency(this.caculateTotal())
         }}</div>
       </div>
     </div>
@@ -63,6 +63,9 @@ export default {
     productCarts: function () {
       return store.state.product.productCart;
     },
+    commons() {
+      return commons;
+    }
   },
   methods: {
     deleteShoppingCart(product_id, product_size) {
@@ -79,15 +82,6 @@ export default {
       }
       return sum;
     },
-    caculateSaleOff(price, discount) {
-      return commons.caculateSaleOff(price, discount);
-    },
-    fomatCurrency(number) {
-      return commons.fomatCurrency(number);
-    },
-    caculateProductQuantity(product_cart) {
-      return commons.caculateProductQuantity(product_cart);
-    }
   },
 };
 </script>

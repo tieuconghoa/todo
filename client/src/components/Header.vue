@@ -60,7 +60,7 @@
               </svg>
               <span class="count-holder">
                 <span class="count">{{
-                    caculateProductQuantity(this.productCart)
+                    commons.caculateProductQuantity(this.productCart)
                 }}</span>
               </span>
             </span>
@@ -131,9 +131,9 @@
                     {{ product.name }}
                   </div>
                   <div class="price-product">
-                    <span class="">{{ fomatCurrency(product.discount) }}</span>
+                    <span class="">{{ commons.fomatCurrency(product.discount) }}</span>
                     <span class="ml-1 font-weight-light btn-sm" v-if="product.price != product.discount"><del>{{
-                        fomatCurrency(product.price)
+                        commons.fomatCurrency(product.price)
                     }}</del></span>
                   </div>
                 </div>
@@ -181,7 +181,7 @@
                         product.count
                     }}</span>
                     <span class="ml-4 price-product">{{
-                        fomatCurrency(product.discount)
+                        commons.fomatCurrency(product.discount)
                     }}</span>
                   </div>
                 </div>
@@ -191,7 +191,7 @@
               <div class="total d-flex justify-content-between">
                 <span class="text-left">TỔNG CỘNG:</span>
                 <span class="text-right mt-1">{{
-                    fomatCurrency(caculateTotal())
+                    commons.fomatCurrency(caculateTotal())
                 }}</span>
               </div>
               <div class="mt-1 shipping text-left">
@@ -228,6 +228,9 @@ export default {
     productCart() {
       return store.state.product.productCart
     },
+    commons() {
+      return commons;
+    }
   },
   methods: {
     searchProduct() {
@@ -267,15 +270,6 @@ export default {
         path: "/cart"
       }).catch((err) => { console.log(err) });
     },
-    caculateSaleOff(price, discount) {
-      return commons.caculateSaleOff(price, discount);
-    },
-    fomatCurrency(number) {
-      return commons.fomatCurrency(number);
-    },
-    caculateProductQuantity(product_cart) {
-      return commons.caculateProductQuantity(product_cart);
-    }
   },
   created() {
     window.onscroll = () => {

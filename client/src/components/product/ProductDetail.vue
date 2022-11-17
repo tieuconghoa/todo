@@ -18,10 +18,10 @@
         <h1 class="text-left">{{ product.name }}</h1>
         <div class="h4 text-left">
           <span class="text-danger font-weight-bold">{{
-              fomatCurrency(product.discount)
+              commons.fomatCurrency(product.discount)
           }}</span>
           <span class="btn ml-1 font-weight-light" v-if="product.price != product.discount"><del>{{
-              fomatCurrency(product.price)
+              commons.fomatCurrency(product.price)
           }}</del></span>
         </div>
         <div class="form-inline">
@@ -108,18 +108,18 @@
                 <div class="img-fluid product-item" @click="viewDetail(item.id)">
                   <img :src="item.image_url" class="d-block w-100" alt="..." />
                 </div>
-                <div class="sale-off" v-if="caculateSaleOff(item.price, item.discount) > 0">
-                  {{ caculateSaleOff(item.price, item.discount) }}%
+                <div class="sale-off" v-if="commons.caculateSaleOff(item.price, item.discount) > 0">
+                  {{ commons.caculateSaleOff(item.price, item.discount) }}%
                 </div>
                 <div class="product-name mt-2 font-weight-bold">
                   {{ item.name }}
                 </div>
                 <div>
                   <span class="text-danger font-weight-bold">{{
-                      fomatCurrency(item.discount)
+                      commons.fomatCurrency(item.discount)
                   }}</span>
                   <span class="ml-1 font-weight-light btn-sm" v-if="item.price != item.discount"><del>{{
-                      fomatCurrency(item.price)
+                     commons.fomatCurrency(item.price)
                   }}</del></span>
                 </div>
               </div>
@@ -168,6 +168,9 @@ export default {
     product: function () {
       return store.state.product.productDetail || {};
     },
+    commons() {
+      return commons;
+    }
   },
   methods: {
     addToCart() {
@@ -194,15 +197,6 @@ export default {
     viewDetail(product_id) {
       this.$router.push(`/product/${product_id}`);
     },
-    caculateSaleOff(price, discount) {
-      return commons.caculateSaleOff(price, discount);
-    },
-    fomatCurrency(number) {
-      return commons.fomatCurrency(number);
-    },
-    caculateProductQuantity(product_cart) {
-      return commons.caculateProductQuantity(product_cart);
-    }
   },
   created() {
     store.dispatch("product/getProductDetail", this.$route.params.name);
