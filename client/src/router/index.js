@@ -6,6 +6,9 @@ import ProductList from "@/components/product/ProductList.vue";
 import ProductDetail from "@/components/product/ProductDetail.vue";
 import ProductCart from "@/components/product/ProductCart.vue";
 import Dashboard from "@/components/admin/Dashboard.vue";
+import AdminProductList from "@/components/admin/products/AdminProductList.vue";
+import AddProduct from "@/components/admin/products/AddProduct.vue";
+
 import store from "../store";
 
 const routes = [
@@ -54,6 +57,16 @@ const routes = [
     name: "Dashboard",
     component: Dashboard,
   },
+  {
+    path :"/admin/product",
+    name: "AdminProduct",
+    component: AdminProductList
+  },
+  {
+    path: "/admin/product/add",
+    name: "AddProduct",
+    component: AddProduct
+  }
 ];
 const router = createRouter({
   history: createWebHistory(),

@@ -6,7 +6,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
       <div class="sidebar-content">
         <div class="sidebar-brand mt-3">
-         <i class="fa-sharp fa-solid fa-bag-shopping"></i>
+          <i class="fa-sharp fa-solid fa-bag-shopping"></i>
           <a href="#">Admin Ecommerce</a>
           <div id="close-sidebar">
             <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -16,7 +16,7 @@
         <!-- sidebar-search  -->
         <div class="sidebar-menu mt-5">
           <ul>
-            <li class="sidebar-item">
+            <li class="sidebar-item" @click="() => {this.$router.push('/admin')}">
               <a href="#">
                 <i class="fa fa-tachometer-alt"></i>
                 <span>Dashboard</span>
@@ -29,10 +29,10 @@
               </a>
               <div class="sidebar-submenu">
                 <ul>
-                  <li class="sidebar-item">
+                  <li class="sidebar-item" @click="() => { this.$router.push('/admin/product/add') }">
                     <a href="#">Add product</a>
                   </li>
-                  <li class="sidebar-item">
+                  <li class="sidebar-item" @click="productlistClick()">
                     <a href="#">Product list</a>
                   </li>
                   <li class="sidebar-item">
@@ -92,6 +92,11 @@
 </template>
 <script>
 export default {
+  methods : {
+    productlistClick() {
+     this.$router.push('/admin/product');
+    }
+  },
   mounted() {
     jQuery(function ($) {
       $(".sidebar-dropdown > a").click(function () {
@@ -107,8 +112,8 @@ export default {
       });
       $(".sidebar-menu ul .sidebar-item").click(function () {
         if ($(this).hasClass("active")) {
-            $(".sidebar-menu ul .sidebar-item").removeClass("active");
-            $(this).addClass("active");
+          $(".sidebar-menu ul .sidebar-item").removeClass("active");
+          $(this).addClass("active");
         } else {
           $(".sidebar-menu ul .sidebar-item").removeClass("active");
           $(this).addClass("active");
@@ -131,27 +136,35 @@ export default {
   0% {
     transform: rotate(0deg);
   }
+
   10% {
     transform: rotate(10deg);
   }
+
   30% {
     transform: rotate(0deg);
   }
+
   40% {
     transform: rotate(-10deg);
   }
+
   50% {
     transform: rotate(0deg);
   }
+
   60% {
     transform: rotate(5deg);
   }
+
   70% {
     transform: rotate(0deg);
   }
+
   80% {
     transform: rotate(-5deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -162,17 +175,20 @@ export default {
     transform: scale(0.9);
     opacity: 1;
   }
+
   100% {
     transform: scale(2);
     opacity: 0;
   }
 }
+
 body {
   font-size: 0.9rem;
 }
+
 .page-wrapper .sidebar-wrapper,
-.sidebar-wrapper .sidebar-brand > a,
-.sidebar-wrapper .sidebar-dropdown > a:after,
+.sidebar-wrapper .sidebar-brand>a,
+.sidebar-wrapper .sidebar-dropdown>a:after,
 .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a:before,
 .sidebar-wrapper ul li a i,
 .page-wrapper .page-content,
@@ -191,6 +207,7 @@ body {
 .sidebar-menu ul li {
   text-align: left;
 }
+
 /*----------------page-wrapper----------------*/
 
 .page-wrapper .theme {
@@ -219,6 +236,7 @@ body {
     padding-left: 300px;
   }
 }
+
 /*----------------show sidebar button----------------*/
 #show-sidebar {
   position: fixed;
@@ -228,10 +246,12 @@ body {
   width: 35px;
   transition-delay: 0.3s;
 }
+
 .page-wrapper.toggled #show-sidebar {
   left: -40px;
   transition: all 1s;
 }
+
 /*----------------sidebar-wrapper----------------*/
 
 .sidebar-wrapper {
@@ -275,7 +295,7 @@ body {
   align-items: center;
 }
 
-.sidebar-wrapper .sidebar-brand > a {
+.sidebar-wrapper .sidebar-brand>a {
   text-transform: uppercase;
   font-weight: bold;
   flex-grow: 1;
@@ -285,6 +305,7 @@ body {
   cursor: pointer;
   font-size: 20px;
 }
+
 /*--------------------sidebar-header----------------------*/
 
 .sidebar-wrapper .sidebar-header {
@@ -311,7 +332,7 @@ body {
   float: left;
 }
 
-.sidebar-wrapper .sidebar-header .user-info > span {
+.sidebar-wrapper .sidebar-header .user-info>span {
   display: block;
 }
 
@@ -332,7 +353,7 @@ body {
 
 /*-----------------------sidebar-search------------------------*/
 
-.sidebar-wrapper .sidebar-search > div {
+.sidebar-wrapper .sidebar-search>div {
   padding: 10px 20px;
 }
 
@@ -367,12 +388,12 @@ body {
   border-radius: 4px;
 }
 
-.sidebar-wrapper .sidebar-menu ul li a:hover > i::before {
+.sidebar-wrapper .sidebar-menu ul li a:hover>i::before {
   display: inline-block;
   animation: swing ease-in-out 0.5s 1 alternate;
 }
 
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown > a:after {
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown>a:after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f105";
@@ -416,7 +437,7 @@ body {
   display: none;
 }
 
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a:after {
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown.active>a:after {
   transform: rotate(90deg);
   right: 17px;
 }
@@ -434,7 +455,7 @@ body {
   display: flex;
 }
 
-.sidebar-footer > a {
+.sidebar-footer>a {
   flex-grow: 1;
   text-align: center;
   height: 35px;
@@ -442,7 +463,7 @@ body {
   position: relative;
 }
 
-.sidebar-footer > a .notification {
+.sidebar-footer>a .notification {
   position: absolute;
   top: 0;
 }
@@ -479,7 +500,7 @@ body {
   padding-top: 20px;
 }
 
-.page-wrapper .page-content > div {
+.page-wrapper .page-content>div {
   padding: 20px 40px;
 }
 
@@ -493,32 +514,40 @@ body {
   width: 5px;
   height: 7px;
 }
+
 ::-webkit-scrollbar-button {
   width: 0px;
   height: 0px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #525965;
   border: 0px none #ffffff;
   border-radius: 0px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #525965;
 }
+
 ::-webkit-scrollbar-thumb:active {
   background: #525965;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
   border: 0px none #ffffff;
   border-radius: 50px;
 }
+
 ::-webkit-scrollbar-track:hover {
   background: transparent;
 }
+
 ::-webkit-scrollbar-track:active {
   background: transparent;
 }
+
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
@@ -539,17 +568,17 @@ body {
 .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-status,
 .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
 .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text,
-.chiller-theme .sidebar-wrapper .sidebar-brand > a,
+.chiller-theme .sidebar-wrapper .sidebar-brand>a,
 .chiller-theme .sidebar-wrapper .sidebar-menu ul li a,
-.chiller-theme .sidebar-footer > a {
+.chiller-theme .sidebar-footer>a {
   color: #000000;
 }
 
-.chiller-theme .sidebar-wrapper .sidebar-menu ul li:hover > a,
-.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a,
+.chiller-theme .sidebar-wrapper .sidebar-menu ul li:hover>a,
+.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active>a,
 .chiller-theme .sidebar-wrapper .sidebar-header .user-info,
-.chiller-theme .sidebar-wrapper .sidebar-brand > a:hover,
-.chiller-theme .sidebar-footer > a:hover i {
+.chiller-theme .sidebar-wrapper .sidebar-brand>a:hover,
+.chiller-theme .sidebar-footer>a:hover i {
   color: #3961b5;
 }
 
@@ -562,13 +591,8 @@ body {
 }
 
 .chiller-theme .sidebar-wrapper ul li:hover a i,
-.chiller-theme
-  .sidebar-wrapper
-  .sidebar-dropdown
-  .sidebar-submenu
-  li
-  a:hover:before,
-.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu:focus + span,
+.chiller-theme .sidebar-wrapper .sidebar-dropdown .sidebar-submenu li a:hover:before,
+.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu:focus+span,
 .chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active a i {
   color: #16c7ff;
   text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
@@ -583,11 +607,11 @@ body {
   border-top: 2px solid #464a52;
 }
 
-.chiller-theme .sidebar-footer > a:first-child {
+.chiller-theme .sidebar-footer>a:first-child {
   border-left: none;
 }
 
-.chiller-theme .sidebar-footer > a:last-child {
+.chiller-theme .sidebar-footer>a:last-child {
   border-right: none;
 }
 </style>

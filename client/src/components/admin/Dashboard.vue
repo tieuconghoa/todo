@@ -110,20 +110,6 @@ export default {
 };
 </script>
 <style scoped>
-.page-content {
-  display: inline-block;
-  width: 100%;
-  padding: 20px 20px 20px 20px;
-  background: rgb(247, 247, 247);
-  height: 100vh;
-  transition: all 0.5s;
-}
-
-.page-content.toggled {
-  padding-left: 280px;
-  transition: all 0.5s;
-}
-
 .report {
   display: flex;
   justify-content: space-between;
