@@ -6,9 +6,9 @@
     <div class="content">
       <div class="row justify-content-center mt-0">
         <div
-          class="col-12 col-sm-10 col-md-8 col-lg-7 text-center p-0 mt-3 mb-2"
+          class="col-12 col-sm-10 col-md-8 col-lg-8 text-center p-0 mt-3 mb-2"
         >
-          <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+          <div class="cards px-0 pt-4 pb-0 mt-3 mb-3">
             <h2><strong>Đăng ký sản phẩm mới</strong></h2>
             <p></p>
             <p></p>
@@ -24,7 +24,7 @@
                       <strong>Số lượng và kích thước</strong>
                     </li>
                     <li id="payment"><strong>Chi tiết</strong></li>
-                    <li id="confirm"><strong>Hình ảnh</strong></li>
+                    <li id="image"><strong>Hình ảnh</strong></li>
                     <li id="confirm"><strong>Hoàn tất</strong></li>
                   </ul>
                   <!-- fieldsets -->
@@ -226,44 +226,97 @@
                       name="next"
                       class="next ml-3 btn btn-primary"
                     >
+                      Tiếp
+                    </button>
+                  </fieldset>
+                  <fieldset>
+                    <div class="form-card">
+                      <div class="d-flex mt-4">
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                      </div>
+                      <div class="d-flex mt-4">
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                        <div class="file-wrapper mx-1 col-3">
+                          <input
+                            type="file"
+                            name="upload-img"
+                            accept="image/*"
+                          />
+                          <div class="close-btn">×</div>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      name="previous"
+                      class="previous mt-3 btn btn-light"
+                    >
+                      Trước
+                    </button>
+                    <button
+                      type="button"
+                      name="next"
+                      class="next mt-3 ml-3 btn btn-primary"
+                    >
                       Xác nhận
                     </button>
                   </fieldset>
                   <fieldset>
-                    <div class="form-card row">
-                      <div class="file-wrapper mx-0 col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                      <div class="file-wrapper col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                      <div class="file-wrapper col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                      <div class="file-wrapper col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                      <div class="file-wrapper col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                      <div class="file-wrapper col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                      <div class="file-wrapper col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                      <div class="file-wrapper col-3">
-                        <input type="file" name="upload-img" accept="image/*" />
-                        <div class="close-btn">×</div>
-                      </div>
-                    </div>
+                    <div class="form-card">OK</div>
                   </fieldset>
                 </form>
               </div>
@@ -301,6 +354,7 @@ export default {
   },
   created() {
     $(document).ready(function () {
+      $("#msform fieldset:not(:first-of-type)").css("display", "none");
       var current_fs, next_fs, previous_fs; //fieldsets
       var opacity;
 
@@ -406,8 +460,8 @@ export default {
       $(".close-btn").on("click", function () {
         //Unset the image
         let file = $('input[name="upload-img"]');
-        $(".file-wrapper").css("background-image", "unset");
-        $(".file-wrapper").removeClass("file-set");
+        $(this.parentNode).css("background-image", "unset");
+        $(this.parentNode).removeClass("file-set");
         file.replaceWith((file = file.clone(true)));
       });
 
@@ -446,7 +500,7 @@ export default {
 }
 
 /*The background card*/
-.card {
+.cards {
   z-index: 0;
   border: none;
   border-radius: 0.5rem;
@@ -475,17 +529,21 @@ export default {
 /*Icons in the ProgressBar*/
 #progressbar #account:before {
   font-family: FontAwesome;
-  content: "\f023";
+  content: "20%";
 }
 
 #progressbar #personal:before {
   font-family: FontAwesome;
-  content: "\f007";
+  content: "40%";
 }
 
 #progressbar #payment:before {
   font-family: FontAwesome;
-  content: "\f09d";
+  content: "60%";
+}
+#progressbar #image:before {
+  font-family: FontAwesome;
+  content: "80%";
 }
 
 #progressbar #confirm:before {
@@ -526,22 +584,23 @@ export default {
 }
 .file-wrapper {
   width: 180px;
-  height: 200px;
+  height: 180px;
   border: 1px solid gray;
   position: relative;
+  border-radius: 5%;
+  background-color: rgb(247 247 247);
   margin: auto;
-  margin-top: 50px;
 }
 .file-wrapper:after {
-  content: "+";
+  
+  content: "\f0ee";
+  font-family: "Font Awesome 5 Free";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  width: max-content;
-  height: max-content;
   display: block;
   max-height: 85px;
   font-size: 70px;
@@ -579,11 +638,10 @@ input[type="file"] {
   background-repeat: no-repeat;
   color: transparent;
   padding: 10px;
-  border-width: 0px;
+  border-width: 1px;
 }
 .file-set:hover {
-  transition: all 0.5s ease-out;
-  filter: brightness(110%);
+  transition: all 0.5s ease-out;  
 }
 .file-set:before {
   color: transparent;
@@ -596,8 +654,9 @@ input[type="file"] {
   width: 35px;
   height: 35px;
   display: block;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  border-radius: 50%;
+  color: rgb(165 165 166);
   top: 0;
   right: 0;
   font-size: 25px;
@@ -605,6 +664,7 @@ input[type="file"] {
   line-height: 1.5;
   cursor: pointer;
   opacity: 0.8;
+  z-index: 9;
 }
 .file-set > input {
   pointer-events: none;
